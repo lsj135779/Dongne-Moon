@@ -1,0 +1,57 @@
+.background {
+  /* background-position: center; */
+  /* background-image: url("../moon-25.jpeg"); */
+  width: 100%;
+  height: 700px;
+  margin: 0 auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.slogan {
+  color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 50px;
+  /* margin-bottom: 20px; */
+  animation: fadein 3s 2s ease-out forwards;
+}
+@keyframes fadein {
+  from {
+    /* margin-bottom: 10px; */
+    opacity: 0;
+  }
+
+  to {
+    /* margin-bottom: 0px; */
+    opacity: 1;
+  }
+}
+
+.buttonbox {
+  margin-top: 170px;
+  display: flex;
+  justify-content: center;
+}
+.openbutton {
+  border: 1px solid rgb(220, 220, 220);
+  border-radius: 6px;
+  padding: 15px;
+  background: #fccda3;
+  color: #2e1d0e;
+}
+.openbutton:hover {
+  cursor: pointer;
+  background-color: rgba(252, 205, 163, 0.4);
+  /* opacity: 0.6; */
+  box-shadow: gray 3px 3px 3px;
+}
+
+.openbutton:active {
+  box-shadow: none;
+}
