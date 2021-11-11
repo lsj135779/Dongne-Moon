@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -33,5 +31,17 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+
+const { user, post, comment } = sequelize.models;
+post.belongsTo(user);
+user.hasMany(post);
+
+comment.belongsTo(user);
+user.hasMany(comment);
+
+comment.belongsTo(post);
+post.hasMany(comment);
+
 
 module.exports = db;
