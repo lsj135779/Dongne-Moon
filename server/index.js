@@ -1,23 +1,20 @@
+require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
 const app = express();
-const PORT = 4000;
+app.use(express.json());
+const port = 80;
 
-app.use(express.json({
-    limit: "50mb"
-}));
-app.use(express.urlencoded({ extended: false }));
 app.use(
     cors({
-        origin: ["http://localhost:3000"],
-        credentials: true,
-        methods: ["GET", "POST", "OPTIONS", "DELETE"],
+        origin: true,
+        credentials: true
     })
 );
 app.get("/", (req, res) => {
-    res.send("Hello World!!!")
+    res.status(201).send("Hello World!!!rrr")
 })
 
-module.exports = app.listen(PORT, () => {
-    console.log(`Server On: http//localhost:${PORT}/`);
+module.exports = app.listen(port, () => {
+    console.log(`Server On: http//localhost:${port}/`);
 });
