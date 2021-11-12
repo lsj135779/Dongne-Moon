@@ -2,18 +2,21 @@ require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
 const app = express();
-app.use(express.json());
-const port = 80;
+const port = 4000;
+const controllers = require("./controllers")
 
+app.use(express.json())
 app.use(
     cors({
         origin: true,
         credentials: true
     })
 );
-app.get("/", (req, res) => {
-    res.status(201).send("Hello World!!!rrr")
-})
+app.use("/", controllers);
+// app.get('/', (req, res) => {
+//     res.status(200).send('Hello World!1');
+// })
+
 
 module.exports = app.listen(port, () => {
     console.log(`Server On: http//localhost:${port}/`);
