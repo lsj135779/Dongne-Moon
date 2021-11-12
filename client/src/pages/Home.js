@@ -1,5 +1,6 @@
 import React from "react";
 import "./Home.css";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -12,7 +13,9 @@ export default function Home() {
       </div>
 
       <div className="buttonbox">
-        <div className="openbutton">OPEN THE DOOR</div>
+        <Link to="/main" style={{ textDecoration: "none" }}>
+          <div className="openbutton">OPEN THE DOOR</div>
+        </Link>
       </div>
     </>
   );
