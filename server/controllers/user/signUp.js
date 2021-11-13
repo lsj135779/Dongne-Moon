@@ -25,9 +25,6 @@ module.exports = async (req, res) => {
     address,
     password: encryptedPW,
     salt,
-    img: "123",
-    intro: "부자",
-    nickname: "개부자",
   });
   return res.status(200).json({ message: "ok" });
 };
