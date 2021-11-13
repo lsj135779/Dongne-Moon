@@ -9,7 +9,8 @@ router.patch("/user/intro/:id", userCtrl.modifyIntro);
 router.post("/user/signup", userCtrl.signUp);
 router.post("/user/signin", userCtrl.signIn);
 router.get("/user/info/:id", userCtrl.getInfo);
-// router.get("/user/auth", userCtrl.getAuth);
+// router.delete("/user/withdrawal", userCtrl.withdrawal);
+router.post("/user/siginout", userCtrl.signOut);
 
 //post
 

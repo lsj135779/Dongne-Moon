@@ -5,5 +5,6 @@ module.exports = {
   signUp: require("./signUp"),
   signIn: require("./signIn"),
   getInfo: require("./getInfo"),
-  // getAuth: require("./getAuth"),
+  // withdrawal: require("./withdrawal"),
+  signOut: require("./signOut"),
 };
