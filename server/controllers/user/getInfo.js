@@ -1,4 +1,3 @@
-const { user } = require("../../models");
 const { verify } = require("jsonwebtoken");
 
 module.exports = async (req, res) => {
@@ -9,9 +8,9 @@ module.exports = async (req, res) => {
   } else {
     const userInfo = verify(token, process.env.ACCESS_SECRET);
     if (!userInfo) {
-      return res.status(403).send({ message: "invalid token" });
+      return res.status(403).json({ message: "invalid token" });
     } else {
-      return res.status(200).send({ data: userInfo, message: "ok" });
+      return res.status(200).json({ data: userInfo, message: "ok" });
     }
   }
 };
