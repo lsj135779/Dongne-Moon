@@ -1,11 +1,51 @@
 * {
   margin: 0;
   padding: 0;
-  color: hotpink;
   box-sizing: border-box;
 }
-
+.headBox {
+  height: 60px;
+  width: 100%;
+  background-color: #ffdbc1;
+}
+.header-master {
+  flex-direction: row;
+  display: flex;
+  width: 100%;
+}
+.header-material {
+  margin-top: 12px;
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 .logout {
+  text-decoration: none;
+  margin-left: 5%;
+  color: #68625d;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 16px;
+}
+.login {
+  color: #68625d;
+  text-decoration: none;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 16px;
+}
+.signup {
+  color: #68625d;
+  margin-left: 5%;
+  text-decoration: none;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 16px;
+}
+
+/* .logout {
   text-decoration: none;
 }
 
@@ -50,4 +90,4 @@ header ul > li {
   height: 100%;
   display: flex;
   align-items: center;
-}
+} */
