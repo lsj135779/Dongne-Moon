@@ -6,13 +6,13 @@ module.exports = async (req, res) => {
   if (!token) {
     return res.status(403).json({ message: "fail" });
   } else {
-    const userInfo = verify(token, process.env.ACCESS_SECRET);
-    if (!userInfo) {
+    const verified = verify(token, process.env.ACCESS_SECRET);
+    if (!verified) {
       return res.status(403).json({ message: "invalid token" });
     } else {
       await user.destroy({
         where: {
-          id: userInfo.id,
+          id: verified.id,
         },
       });
       return res.status(200).json({ message: "ok" });

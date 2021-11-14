@@ -1,12 +1,8 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 .headBox {
   height: 60px;
   width: 100%;
-  background-color: #ffdbc1;
+  background-color: #ffffff;
+  box-shadow: rgb(0 0 0 / 20%) 0px 0px 4px 0px;
 }
 .header-master {
   flex-direction: row;
@@ -21,6 +17,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .logout {
   text-decoration: none;
   margin-left: 5%;
@@ -44,50 +41,7 @@
   font-style: normal;
   font-size: 16px;
 }
-
-/* .logout {
-  text-decoration: none;
+.logo {
+  width: 40px;
+  height: 40px;
 }
-
-ul {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-  outline: none;
-}
-
-.container {
-  margin: 0 auto;
-  background: rgb(255, 220, 193);
-}
-
-header {
-  width: 100%;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-header > h2 {
-  margin-left: 500px;
-}
-header > nav {
-  width: 600px;
-  height: 100%;
-}
-
-header ul {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-header ul > li {
-  font-size: 20px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-} */

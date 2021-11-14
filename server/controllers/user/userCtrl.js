@@ -1,5 +1,5 @@
 module.exports = {
-  // modifyImg: require("./modifyImg"),
+  modifyImg: require("./modifyImg"),
   modifyNickname: require("./modifyNickname"),
   modifyIntro: require("./modifyIntro"),
   signUp: require("./signUp"),
@@ -7,4 +7,5 @@ module.exports = {
   getInfo: require("./getInfo"),
   withdrawal: require("./withdrawal"),
   signOut: require("./signOut"),
+  checkEmail: require("./checkEmail"),
 };
