@@ -7,21 +7,21 @@ module.exports = async (req, res) => {
   if (!token) {
     return res.status(403).json({ message: "fail" });
   } else {
-    const userInfo = verify(token, process.env.ACCESS_SECRET);
-    if (!userInfo) {
+    const verified = verify(token, process.env.ACCESS_SECRET);
+    if (!verified) {
       return res.status(403).json({ message: "invalid token" });
     } else {
       await user.update(
         { nickname: nickname },
         {
           where: {
-            id: userInfo.id,
+            id: verified.id,
           },
         }
       );
       const userNickname = await user.findOne({
         where: {
-          id: userInfo.id,
+          id: verified.id,
         },
         attributes: ["nickname"],
       });
