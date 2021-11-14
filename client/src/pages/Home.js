@@ -13,7 +13,7 @@ export default function Home() {
       </div>
 
       <div className="buttonbox">
-        <Link to="/main" style={{ textDecoration: "none" }}>
+        <Link to={"/main"} style={{ textDecoration: "none" }}>
           <div className="openbutton">OPEN THE DOOR</div>
         </Link>
       </div>
