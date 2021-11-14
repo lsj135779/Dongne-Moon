@@ -15,8 +15,8 @@ const HeadBox = styled.header`
   align-items: center;
 `;
 const Img = styled.img`
-  height: ${(props) => props.height || "30px"};
-  width: ${(props) => props.width || "100px"};
+  height: ${(props) => props.height || "32px"};
+  width: ${(props) => props.width || "32px"};
 `;
 
 export default function Header({ isLogin }) {
@@ -28,24 +28,24 @@ export default function Header({ isLogin }) {
           <div className="header-material"></div>
           <div className="header-material">
             <Link to="/">
-              <Img src="달달달.png" />
+              <img src="자산 5.svg" alt="" className="logo" />
             </Link>
           </div>
           {isLogin ? (
             <div className="header-material">
-              <Link to="/user/info">
+              <Link to="/info">
                 <Img width="10px" height="15px" src="mypage.ico" alt="Mypage" />
               </Link>
-              <Link to="user/logout" className="logout">
+              <Link to="/logout" className="logout">
                 Logout
               </Link>
             </div>
           ) : (
             <div className="header-material">
-              <Link to="/user/login" className="login">
+              <Link to="/login" className="login">
                 LOGIN
               </Link>
-              <Link to="/user/signup" className="signup">
+              <Link to="/signup" className="signup">
                 SIGNUP
               </Link>
             </div>

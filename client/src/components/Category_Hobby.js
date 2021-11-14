@@ -11,12 +11,7 @@ export default function Category_Hobby() {
             <div className="big-square memo">
               <div className="container">
                 <div className="pic">
-                  <img
-                    width="100px"
-                    height="100px"
-                    src="취미.png"
-                    alt="Mypage"
-                  />
+                  <img width="100px" height="100px" src="취미.png" alt="" />
                 </div>
                 <div className="title">취미</div>
               </div>
@@ -28,7 +23,7 @@ export default function Category_Hobby() {
             <div className="big-square memo">
               <div className="container">
                 <div className="pic">
-                  <img width="100px" height="100px" src="립.png" alt="Mypage" />
+                  <img width="100px" height="100px" src="립.png" alt="" />
                 </div>
                 <div className="title">맛집</div>
               </div>
@@ -49,12 +44,7 @@ export default function Category_Hobby() {
             <div className="big-square memo">
               <div className="container">
                 <div className="pic">
-                  <img
-                    width="100px"
-                    height="100px"
-                    src="반려동물.png"
-                    alt="Mypage"
-                  />
+                  <img width="100px" height="100px" src="반려동물.png" alt="" />
                 </div>
                 <div className="title">반려동물</div>
               </div>
@@ -66,12 +56,7 @@ export default function Category_Hobby() {
             <div className="big-square memo">
               <div className="container">
                 <div className="pic">
-                  <img
-                    width="100px"
-                    height="100px"
-                    src="동네소식.png"
-                    alt="Mypage"
-                  />
+                  <img width="100px" height="100px" src="동네소식.png" alt="" />
                 </div>
                 <div className="title">동네소식</div>
               </div>

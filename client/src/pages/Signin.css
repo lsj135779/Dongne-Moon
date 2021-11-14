@@ -1,4 +1,4 @@
-.signup-master {
+.signin-master {
   flex-direction: row;
   display: flex;
   height: 75%;
@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
 }
-.signup-material {
+.signin-material {
   max-width: 400px;
   min-width: 400px;
   margin-top: 150px;
@@ -17,10 +17,10 @@
   align-items: center;
 }
 
-.signup-form {
+.signin-form {
   margin-top: 40px;
-  width: 100%;
-  height: 100%;
+  width: 400px;
+  height: 400px;
   border-radius: 20px;
   background-color: #ffdbc1;
   color: #322922;
@@ -29,7 +29,7 @@
   justify-content: center;
   align-items: center;
 }
-.wrapper {
+.signin-wrap {
   margin-top: 1rem;
   display: flex;
   width: 100%;
@@ -61,11 +61,22 @@
   line-height: 2.5rem;
   font-size: 15px;
 }
+
+.button-master {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  height: 40%;
+}
 .submitbox {
   width: 300px;
-  margin-top: 40px;
+  margin-top: 70px;
   margin-bottom: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -81,8 +92,13 @@
   background: #ffffff;
   color: #2e1d0e;
 }
-.signuplogo {
-  width: 70px;
+.question {
+  font-size: 12px;
+  color: rgb(55, 55, 55);
+  margin-top: 15px;
+}
+.signinlogo {
+  width: px;
   height: 70px;
 }
 .logo {
@@ -90,36 +106,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.emailverify1 {
-  font-size: 11px;
-  margin-top: 2px;
-  justify-content: flex-start;
-}
-.emailverify2 {
-  font-size: 11px;
-  margin-top: 2px;
-  justify-content: flex-start;
-}
-.emailverify3 {
-  font-size: 11px;
-  margin-top: 2px;
-  justify-content: flex-start;
-}
-.hide {
-  display: none;
-  font-size: 11px;
-  margin-top: 2px;
-}
-
-.pass {
-  color: green;
-  font-size: 11px;
-  margin-top: 2px;
-}
-
-.warn {
-  color: red;
-  font-size: 11px;
-  margin-top: 2px;
 }
