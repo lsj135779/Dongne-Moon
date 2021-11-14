@@ -28,7 +28,7 @@ export default function Header({ isLogin }) {
           <div className="header-material"></div>
           <div className="header-material">
             <Link to="/">
-              <Img src="달달달.png" />
+              <Img src="5.svg" />
             </Link>
           </div>
           {isLogin ? (
@@ -36,16 +36,14 @@ export default function Header({ isLogin }) {
               <Link to="/user/info">
                 <Img width="10px" height="15px" src="mypage.ico" alt="Mypage" />
               </Link>
-              <Link to="user/logout" className="logout">
-                Logout
-              </Link>
+              <div className="logout">Logout</div>
             </div>
           ) : (
             <div className="header-material">
-              <Link to="/user/login" className="login">
+              <Link to="/login" className="login">
                 LOGIN
               </Link>
-              <Link to="/user/signup" className="signup">
+              <Link to="/signup" className="signup">
                 SIGNUP
               </Link>
             </div>
