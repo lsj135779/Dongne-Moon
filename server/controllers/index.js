@@ -12,7 +12,7 @@ router.post("/user/signup", userCtrl.signUp);
 router.post("/user/signin", userCtrl.signIn);
 router.get("/user/info", userCtrl.getInfo);
 router.delete("/user/withdrawal", userCtrl.withdrawal);
-router.post("/user/siginout", userCtrl.signOut);
+router.post("/user/signout", userCtrl.signOut);
 router.post("/user/email", userCtrl.checkEmail);
 
 //post
