@@ -42,7 +42,11 @@ module.exports = async (req, res) => {
     };
     const token = sign(payload, process.env.ACCESS_SECRET, { expiresIn: "1d" });
 
-    return res.status(200).json({ message: "ok", accesstoken: token });
+    return res.cookie("accesstoken", token, {
+      sameSite: "none",
+      secure: true,
+      httpOnly: true,
+    }).status(200).json({ message: "ok" });
   } else {
     return res.status(404).json({ message: "invalid user" });
   }

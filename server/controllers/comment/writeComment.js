@@ -1,4 +1,4 @@
-const { comment } = require("../../models");
+const { post, comment } = require("../../models");
 const { verify } = require("jsonwebtoken");
 
 module.exports = async (req, res) => {
@@ -16,6 +16,8 @@ module.exports = async (req, res) => {
       if (!verified) {
         return res.status(403).json({ message: "invalid token" });
       } else {
+        console.log(`#######`, userId);
+        console.log(`$$$$$$$`, verified.id);
         if (userId !== verified.id) {
           return res.status(404).json({ message: "fail" });
         } else {
@@ -24,6 +26,14 @@ module.exports = async (req, res) => {
             contents,
             postId,
           });
+          const postInfo = await post.findOne({
+            where: { id: postId }
+          })
+          await post.update({
+            comment_cnt: postInfo.comment_cnt + 1
+          }, {
+            where: { id: postInfo.id }
+          })
           return res.status(201).json({ message: "ok" });
         }
       }

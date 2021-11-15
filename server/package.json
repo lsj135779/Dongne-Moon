@@ -3,6 +3,7 @@
     "start": "nodemon index.js"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^10.0.0",
@@ -10,6 +11,7 @@
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3-rc.0",
     "nodemon": "^2.0.15",
-    "sequelize": "^6.9.0"
+    "sequelize": "^6.9.0",
+    "sequelize-cli": "^6.3.0"
   }
 }
