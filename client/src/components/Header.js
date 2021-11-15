@@ -1,7 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "./Header.css";
+import axios from "axios";
+axios.defaults.withCredentials = true;
+
 // import "./Header.css";
 const HeadBox = styled.header`
   height: 60px;
@@ -19,7 +22,16 @@ const Img = styled.img`
   width: ${(props) => props.width || "100px"};
 `;
 
-export default function Header({ isLogin }) {
+export default function Header({ isLogin, setUserinfo, setIsLogin }) {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    axios.post("http://localhost:4000/user/signout").then((res) => {
+      setIsLogin(false);
+
+      navigate("/main");
+    });
+  };
+
   return (
     <div className="headBox">
       <div>
@@ -33,18 +45,26 @@ export default function Header({ isLogin }) {
           </div>
           {isLogin ? (
             <div className="header-material">
-              <Link to="/user/info">
-                <Img width="10px" height="15px" src="mypage.ico" alt="Mypage" />
+              <Link to="/mypage">
+                {" "}
+                <div className="logout">Mypage</div>
               </Link>
-              <div className="logout">Logout</div>
+              <div
+                className="logout"
+                onClick={() => {
+                  handleLogout();
+                }}
+              >
+                Logout
+              </div>
             </div>
           ) : (
             <div className="header-material">
               <Link to="/login" className="login">
-                LOGIN
+                Login
               </Link>
               <Link to="/signup" className="signup">
-                SIGNUP
+                Signup
               </Link>
             </div>
           )}

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
 import Footer from "../components/Footer";
 import DaumPostcode from "react-daum-postcode";
 import axios from "axios";
 
 export default function Signup() {
+  const navigate = useNavigate();
   const [isOpenPost, setIsOpenPost] = useState(false);
   const [info, setInfo] = useState({
     email: "",
@@ -120,7 +121,10 @@ export default function Signup() {
           address: info.address,
           password: info.password,
         })
-        .then(() => alert("회원가입완료"))
+        .then((res) => {
+          console.log(res.data);
+          navigate("/login");
+        })
         .catch(() => {
           alert("잘못된정보입니다");
         });

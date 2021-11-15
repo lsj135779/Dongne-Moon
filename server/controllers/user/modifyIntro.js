@@ -2,6 +2,8 @@ const { user } = require("../../models");
 const { verify } = require("jsonwebtoken");
 
 module.exports = async (req, res) => {
+  console.log(req.body);
+  console.log(req.cookies);
   const { intro } = req.body;
   const token = req.cookies.accesstoken;
   if (!token) {
@@ -26,6 +28,7 @@ module.exports = async (req, res) => {
         attributes: ["intro"],
       });
       return res.status(200).json({ data: userIntro, message: "ok" });
+      console.log(userIntro);
     }
   }
 };

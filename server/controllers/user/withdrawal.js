@@ -15,7 +15,8 @@ module.exports = async (req, res) => {
           id: verified.id,
         },
       });
-      return res.status(200).json({ message: "ok" });
+
+      return res.clearCookie("accesstoken").status(200).json({ message: "ok" });
     }
   }
 };
