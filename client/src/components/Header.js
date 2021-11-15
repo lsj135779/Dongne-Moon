@@ -1,7 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "./Header.css";
+import axios from "axios";
+axios.defaults.withCredentials = true;
+
 // import "./Header.css";
 const HeadBox = styled.header`
   height: 60px;
@@ -15,11 +18,20 @@ const HeadBox = styled.header`
   align-items: center;
 `;
 const Img = styled.img`
-  height: ${(props) => props.height || "32px"};
-  width: ${(props) => props.width || "32px"};
+  height: ${(props) => props.height || "30px"};
+  width: ${(props) => props.width || "100px"};
 `;
 
-export default function Header({ isLogin }) {
+export default function Header({ isLogin, setUserinfo, setIsLogin }) {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    axios.post("http://localhost:4000/user/signout").then((res) => {
+      setIsLogin(false);
+
+      navigate("/main");
+    });
+  };
+
   return (
     <div className="headBox">
       <div>
@@ -28,25 +40,31 @@ export default function Header({ isLogin }) {
           <div className="header-material"></div>
           <div className="header-material">
             <Link to="/">
-              <img src="자산 5.svg" alt="" className="logo" />
+              <Img src="5.svg" />
             </Link>
           </div>
           {isLogin ? (
             <div className="header-material">
-              <Link to="/info">
-                <Img width="10px" height="15px" src="mypage.ico" alt="Mypage" />
+              <Link to="/mypage">
+                {" "}
+                <div className="logout">Mypage</div>
               </Link>
-              <Link to="/logout" className="logout">
+              <div
+                className="logout"
+                onClick={() => {
+                  handleLogout();
+                }}
+              >
                 Logout
-              </Link>
+              </div>
             </div>
           ) : (
             <div className="header-material">
               <Link to="/login" className="login">
-                LOGIN
+                Login
               </Link>
               <Link to="/signup" className="signup">
-                SIGNUP
+                Signup
               </Link>
             </div>
           )}

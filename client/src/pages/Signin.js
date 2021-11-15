@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import "./Signin.css";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function Signin() {
+axios.defaults.withCredentials = true;
+
+export default function Signin({ handleResponseSuccess }) {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
@@ -19,12 +22,13 @@ export default function Signin() {
       alert("회원정보를 입력해 주세요");
     } else {
       axios
-        .post("http://localhost:4000//user/signin", {
+        .post("http://localhost:4000/user/signin", {
           email: loginInfo.email,
           password: loginInfo.password,
         })
         .then((res) => {
-          console.log(res.data);
+          handleResponseSuccess();
+          navigate("/main");
         });
     }
   };

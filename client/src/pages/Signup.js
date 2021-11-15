@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
 import Footer from "../components/Footer";
 import DaumPostcode from "react-daum-postcode";
+import axios from "axios";
 
 export default function Signup() {
+  const navigate = useNavigate();
   const [isOpenPost, setIsOpenPost] = useState(false);
   const [info, setInfo] = useState({
     email: "",
@@ -15,7 +17,7 @@ export default function Signup() {
   const [checkInfo, setCheckInfo] = useState({
     email: false,
     duplicate: false,
-    addresses: false,
+    address: false,
     password: false,
     confirmPW: false,
   });
@@ -25,18 +27,34 @@ export default function Signup() {
 
     if (key === "email") {
       if (isEmile(e.target.value)) {
-        setCheckInfo({ ...checkInfo, email: true });
-        console.log("서버로 중복체크!");
+        axios
+          .post("http://localhost:4000/user/email", {
+            email: e.target.value,
+          })
+          .then(() => {
+            setCheckInfo({ ...checkInfo, duplicate: true, email: true });
+          })
+          .catch(() => {
+            setCheckInfo({ ...checkInfo, email: true, duplicate: false });
+          });
       } else {
-        setCheckInfo({ ...checkInfo, email: false });
+        setCheckInfo({ ...checkInfo, email: false, duplicate: false });
       }
     }
 
     if (key === "password") {
       if (isPassword(e.target.value)) {
         setCheckInfo({ ...checkInfo, password: true });
+        if (info.passwordCheck === e.target.value) {
+          setCheckInfo({ ...checkInfo, password: true, confirmPW: true });
+        } else {
+          setCheckInfo({ ...checkInfo, password: true, confirmPW: false });
+        }
       } else {
         setCheckInfo({ ...checkInfo, password: false });
+        if (info.passwordCheck !== e.target.value) {
+          setCheckInfo({ ...checkInfo, password: false, confirmPW: false });
+        }
       }
     }
 
@@ -80,7 +98,7 @@ export default function Signup() {
 
   const isEmile = (value) => {
     let regExp =
-      /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+      /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{3,})$/i;
     return regExp.test(value);
   };
   const isPassword = (value) => {
@@ -88,9 +106,31 @@ export default function Signup() {
     return regExp.test(value);
   };
 
-  const isSignup = (val) => {
-    console.log("버튼클릭!!!", val);
-    // console.log("checkInfo;;;", checkInfo);
+  const isSignup = () => {
+    console.log("checkInfo;;;", checkInfo);
+    if (
+      checkInfo.email &&
+      checkInfo.duplicate &&
+      checkInfo.password &&
+      checkInfo.confirmPW &&
+      checkInfo.address
+    ) {
+      axios
+        .post("http://localhost:4000/user/signup", {
+          email: info.email,
+          address: info.address,
+          password: info.password,
+        })
+        .then((res) => {
+          console.log(res.data);
+          navigate("/login");
+        })
+        .catch(() => {
+          alert("잘못된정보입니다");
+        });
+    } else {
+      alert("모든항목은 필수입니다");
+    }
   };
 
   return (
@@ -114,7 +154,7 @@ export default function Signup() {
         <div className="signup-material">
           <div className="logo">
             <Link to="/main">
-              <img src="자산 5.svg" alt="" className="signuplogo" />
+              <img src="5.svg" alt="" className="signuplogo" />
             </Link>
           </div>
           <div className="signup-form">
@@ -131,9 +171,17 @@ export default function Signup() {
                 ) : (
                   <div className="verify warn">사용할 수 없는 이메일입니다</div>
                 )}
+                {checkInfo.email === true && checkInfo.duplicate === false ? (
+                  <div className="verify warn">중복된 이메일입니다</div>
+                ) : (
+                  ""
+                )}
+                {checkInfo.duplicate ? (
+                  <div className="verify pass">사용 가능한 이메일입니다</div>
+                ) : (
+                  ""
+                )}
 
-                <div className="verify warn hide">중복된 이메일입니다</div>
-                <div className="verify pass hide">사용 가능한 이메일입니다</div>
                 <div className="label">주소</div>
                 <input
                   type="text"
@@ -152,7 +200,9 @@ export default function Signup() {
                 {checkInfo.password ? (
                   ""
                 ) : (
-                  <div className="verify warn">8 ~ 16자 영문, 숫자 조합</div>
+                  <div className="verify warn">
+                    8 ~ 16자 영문, 숫자 조합 입니다.
+                  </div>
                 )}
 
                 <div className="label">비밀번호 확인</div>
@@ -182,7 +232,6 @@ export default function Signup() {
             </div>
           </div>
         </div>
-        {/* <div className="signup-material"></div> */}
       </div>
       <Footer />
     </div>

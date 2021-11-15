@@ -1,7 +1,7 @@
 .signup-master {
   flex-direction: row;
   display: flex;
-  height: 75%;
+  height: 900px;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,7 @@
 .signup-material {
   max-width: 400px;
   min-width: 400px;
-  margin-top: 150px;
+  /* margin-top: 65px; */
   width: 33.3%;
   display: flex;
   flex-direction: column;
@@ -46,12 +46,7 @@
   margin-bottom: 2px;
   justify-content: flex-start;
 }
-.passwordlabel {
-  font-size: 11px;
-  color: gray;
-  margin-top: 2px;
-  justify-content: flex-start;
-}
+
 .input {
   width: 300px;
   height: 40px;
@@ -68,9 +63,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.submitbox:hover {
-  cursor: pointer;
 }
 .submitbutton {
   text-align: center;
@@ -91,35 +83,32 @@
   justify-content: center;
   align-items: center;
 }
-.emailverify1 {
+.verify {
   font-size: 11px;
   margin-top: 2px;
   justify-content: flex-start;
 }
-.emailverify2 {
-  font-size: 11px;
-  margin-top: 2px;
-  justify-content: flex-start;
-}
-.emailverify3 {
-  font-size: 11px;
-  margin-top: 2px;
-  justify-content: flex-start;
+
+.modalBackdrop {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .hide {
   display: none;
-  font-size: 11px;
-  margin-top: 2px;
 }
 
 .pass {
   color: green;
-  font-size: 11px;
-  margin-top: 2px;
 }
 
 .warn {
   color: red;
-  font-size: 11px;
-  margin-top: 2px;
 }

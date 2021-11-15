@@ -1,0 +1,205 @@
+.member-master {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.member-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.member-box {
+  min-width: 600px;
+  max-width: 800px;
+  width: 60%;
+  height: 80%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  position: absolute;
+  background-color: #ffdbc1;
+}
+.top-master {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 35%;
+}
+.top-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+.top-text {
+  font-size: 11px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+.nick-master {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 15%;
+}
+.nick-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  font-weight: bold;
+}
+.nick-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+.email-master1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 15%;
+}
+.email-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  font-weight: bold;
+}
+.email-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+.address-master {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 15%;
+}
+.address-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  font-weight: bold;
+}
+.address-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+.button-master {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 20%;
+}
+.login-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+}
+.signup-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+}
+.text-input {
+  width: 80%;
+  height: 50px;
+  border: 1px solid gray;
+  border-radius: 2px;
+}
+.text-input-tick {
+  width: 80%;
+  height: 100px;
+  border: 1px solid gray;
+  border-radius: 2px;
+}
+
+.button-input {
+  width: 60%;
+  height: 70px;
+  background-color: white;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  justify-content: center;
+  align-items: center;
+}
+.mypage-button {
+  margin-top: 20px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .circle-mypage {
+  background-color: white;
+  width: 150px;
+  height: 150px;
+  border-radius: 100px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 12px;
+  color: #fff;
+  vertical-align: middle;
+  line-height: 200px;
+} */
+.profile {
+  background-color: #ffffff;
+  width: 100px;
+  height: 100px;
+  border-radius: 75px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 12px;
+  color: #322922;
+  vertical-align: middle;
+  line-height: 100px;
+}
+.mypagebox {
+  width: 80%;
+  margin-top: 70px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.mypagebox:hover {
+  cursor: pointer;
+}
+.submitbutton {
+  margin-left: 20px;
+  margin-right: 20px;
+  text-align: center;
+  width: 200px;
+  border: 1px solid rgba(177, 177, 177, 0.5);
+  border-radius: 6px;
+  padding: 15px;
+  background: #ffffff;
+  color: #2e1d0e;
+}

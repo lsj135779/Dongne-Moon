@@ -4,6 +4,9 @@ const express = require("express");
 const app = express();
 const port = 4000;
 const controllers = require("./controllers");
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
 
 app.use(express.json());
 app.use(

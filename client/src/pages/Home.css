@@ -20,6 +20,11 @@
   font-size: 50px;
   /* margin-bottom: 20px; */
   animation: fadein 3s 2s ease-out forwards;
+  font-family: "CookieRun-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 @keyframes fadein {
   from {
