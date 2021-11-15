@@ -3,7 +3,7 @@ const { verify } = require("jsonwebtoken");
 
 module.exports = async (req, res) => {
   // const id = req.params.id;
-  const token = req.headers.accesstoken;
+  const token = req.cookies.accesstoken;
   if (!token) {
     return res.status(403).json({ message: "fail" });
   } else {
