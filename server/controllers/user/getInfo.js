@@ -3,7 +3,6 @@ const { verify } = require("jsonwebtoken");
 
 module.exports = async (req, res) => {
   // const id = req.params.id;
-  // console.log(req.cookies);
   const token = req.cookies.accesstoken;
   if (!token) {
     return res.status(403).json({ message: "fail" });
@@ -29,4 +28,4 @@ module.exports = async (req, res) => {
       return res.status(200).json({ data: userInfo, message: "ok" });
     }
   }
-};
+}
