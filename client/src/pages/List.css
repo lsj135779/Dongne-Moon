@@ -1,0 +1,147 @@
+.menu-master {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.menu-wrap {
+  min-width: 500px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu-box {
+  /* margin-left: 245px; */
+  min-width: 450px;
+  max-width: 800px;
+  margin-top: 60px;
+  width: 50%;
+  height: 50px;
+  left: 50%;
+  top: 50%;
+  border-radius: 20px;
+  background-color: #fccda3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu-material {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.menu-font {
+  color: black;
+}
+.search-input {
+  width: 70%;
+}
+.feed-master {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.feed-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0 0 0;
+}
+.feed {
+  min-width: 450px;
+  max-width: 800px;
+  width: 30%;
+  height: 200px;
+  border-radius: 20px;
+  border: 3px solid #fccda3;
+  background-color: white;
+  margin-bottom: 20px;
+}
+.subject-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  position: relative;
+}
+.subject {
+  background-color: #fccda3;
+  border-radius: 20px;
+  width: 15%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 5%;
+  top: 40%;
+}
+.content-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  position: relative;
+}
+.content {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  left: 5%;
+}
+.address-getdate-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+}
+.address {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  left: 5%;
+}
+.getdate {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  right: 5%;
+}
+.comment-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  position: relative;
+}
+.comment {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  left: 5%;
+}

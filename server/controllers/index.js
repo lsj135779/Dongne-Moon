@@ -12,7 +12,7 @@ router.post("/user/signup", userCtrl.signUp);
 router.post("/user/signin", userCtrl.signIn);
 router.get("/user/info", userCtrl.getInfo);
 router.delete("/user/withdrawal", userCtrl.withdrawal);
-router.post("/user/siginout", userCtrl.signOut);
+router.post("/user/signout", userCtrl.signOut);
 router.post("/user/email", userCtrl.checkEmail);
 
 //post
@@ -22,7 +22,6 @@ router.delete("/post/delete/:id", postCtrl.removePost);
 router.get("/post/read/:id", postCtrl.post);
 router.get("/post/:category", postCtrl.postLists);
 router.get("/post", postCtrl.postLists);
-
 
 //comment
 router.get("/comment/read/:id", commentCtrl.commenterInfo);

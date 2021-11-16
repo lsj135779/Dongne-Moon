@@ -1,0 +1,20 @@
+footer {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: 60px;
+  width: 100%;
+  background: grey;
+  color: white;
+  text-align: center;
+  align-items: center;
+}
+
+.footer-wrap {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 100%;
+}
