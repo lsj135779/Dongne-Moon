@@ -26,7 +26,7 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
     if (profile.intro !== undefined) {
       axios
         .patch(
-          `http://localhost:4000/user/intro/${id}`,
+          `${process.env.REACT_APP_API_URL}/user/intro/${id}`,
 
           {
             intro: profile.intro,
@@ -46,7 +46,7 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
     if (profile.nickname !== undefined) {
       axios
         .patch(
-          `http://localhost:4000/user/nickname/${id}`,
+          `${process.env.REACT_APP_API_URL}/user/nickname/${id}`,
 
           {
             nickname: profile.nickname,
@@ -66,12 +66,14 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
     setEdit(false);
   };
   const withdraw = () => {
-    axios.delete("http://localhost:4000/user/withdrawal").then((res) => {
-      alert("회원탈퇴!");
-      setIsLogin(false);
-      //   setUserinfo(null);
-      navigate("/main");
-    });
+    axios
+      .delete(`${process.env.REACT_APP_API_URL}/user/withdrawal`)
+      .then((res) => {
+        alert("회원탈퇴!");
+        setIsLogin(false);
+        //   setUserinfo(null);
+        navigate("/main");
+      });
   };
 
   return (

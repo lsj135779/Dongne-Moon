@@ -28,7 +28,7 @@ export default function Signup() {
     if (key === "email") {
       if (isEmile(e.target.value)) {
         axios
-          .post("http://localhost:4000/user/email", {
+          .post(`${process.env.REACT_APP_API_URL}/user/email`, {
             email: e.target.value,
           })
           .then(() => {
@@ -116,7 +116,7 @@ export default function Signup() {
       checkInfo.address
     ) {
       axios
-        .post("http://localhost:4000/user/signup", {
+        .post(`${process.env.REACT_APP_API_URL}/user/signup`, {
           email: info.email,
           address: info.address,
           password: info.password,

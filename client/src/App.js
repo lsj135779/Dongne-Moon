@@ -13,7 +13,7 @@ function App() {
   const [userinfo, setUserinfo] = useState("");
 
   const isAuthenticated = () => {
-    axios.get("http://localhost:4000/user/info").then((res) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/user/info`).then((res) => {
       setUserinfo(res.data.data);
       setIsLogin(true);
     });

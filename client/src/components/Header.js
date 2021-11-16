@@ -25,7 +25,7 @@ const Img = styled.img`
 export default function Header({ isLogin, setUserinfo, setIsLogin }) {
   const navigate = useNavigate();
   const handleLogout = () => {
-    axios.post("http://localhost:4000/user/signout").then((res) => {
+    axios.post(`${process.env.REACT_APP_API_URL}/user/signout`).then((res) => {
       setIsLogin(false);
 
       navigate("/main");
