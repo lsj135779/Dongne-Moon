@@ -2,8 +2,9 @@ const { user } = require("../../models");
 const { verify } = require("jsonwebtoken");
 
 module.exports = async (req, res) => {
-  // const id = req.params.id;
-  const token = req.cookies.accesstoken;
+  //const token = req.headers.cookie.split("=")[1];
+  const token = req.headers.accesstoken;
+
   if (!token) {
     return res.status(403).json({ message: "fail" });
   } else {
@@ -15,7 +16,7 @@ module.exports = async (req, res) => {
         where: {
           id: verified.id,
         },
-        attribute: [
+        attributes: [
           "id",
           "email",
           "img",
