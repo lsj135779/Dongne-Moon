@@ -71,23 +71,11 @@ function App() {
 
         <Route
           path="/post=:category"
-          element={
-            <List
-              isLogin={isLogin}
-              setUserinfo={setUserinfo}
-              setIsLogin={setIsLogin}
-            />
-          }
+          element={<List setUserinfo={setUserinfo} />}
         />
         <Route
           path="/post/read=:id"
-          element={
-            <PostRead
-              isLogin={isLogin}
-              setUserinfo={setUserinfo}
-              setIsLogin={setIsLogin}
-            />
-          }
+          element={<PostRead setUserinfo={setUserinfo} />}
         />
       </Routes>
     </BrowserRouter>

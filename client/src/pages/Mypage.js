@@ -141,21 +141,13 @@ export default function Mypage({}) {
                 <div className="email-master1">
                   <div className="email-name">이메일</div>
                   <div className="email-text">
-                    <input
-                      type="text"
-                      value={email}
-                      className="text-input"
-                    ></input>
+                    <div className="text-input">{email}</div>
                   </div>
                 </div>
                 <div className="address-master">
                   <div className="address-name">주소</div>
                   <div className="address-text">
-                    <input
-                      type="text"
-                      value={address}
-                      className="text-input"
-                    ></input>
+                    <div className="text-input">{address}</div>
                   </div>
                 </div>
                 <div className="button-master">
@@ -194,44 +186,27 @@ export default function Mypage({}) {
                     </div>
                   </div>
                   <div className="top-text">
-                    <input
-                      type="text"
-                      value={
-                        intro === "" ? "여러분의 일상을 공유해주세요" : intro
-                      }
-                      className="text-input-tick"
-                    ></input>
+                    <div className="text-input-tick">
+                      {intro === "" ? "여러분의 일상을 공유해주세요" : intro}
+                    </div>
                   </div>
                 </div>
                 <div className="nick-master">
                   <div className="nick-name">닉네임</div>
                   <div className="nick-text">
-                    <input
-                      type="text"
-                      value={nickname}
-                      className="text-input"
-                      onChange={handleInputValue("nickname")}
-                    ></input>
+                    <div className="text-input">{nickname}</div>
                   </div>
                 </div>
                 <div className="email-master1">
                   <div className="email-name">이메일</div>
                   <div className="email-text">
-                    <input
-                      type="text"
-                      value={email}
-                      className="text-input"
-                    ></input>
+                    <div className="text-input">{email}</div>
                   </div>
                 </div>
                 <div className="address-master">
                   <div className="address-name">주소</div>
                   <div className="address-text">
-                    <input
-                      type="text"
-                      value={address}
-                      className="text-input"
-                    ></input>
+                    <div className="text-input">{address}</div>
                   </div>
                 </div>
                 <div className="button-master">
