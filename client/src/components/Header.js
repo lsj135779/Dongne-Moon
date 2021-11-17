@@ -27,7 +27,6 @@ export default function Header({ isLogin, setUserinfo, setIsLogin }) {
   const handleLogout = () => {
     axios.post("http://localhost:4000/user/signout").then((res) => {
       setIsLogin(false);
-
       navigate("/main");
     });
   };

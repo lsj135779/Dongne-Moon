@@ -13,12 +13,12 @@ export default function Signin({ handleResponseSuccess }) {
   });
   const navigate = useNavigate();
 
-  const setCookie = function (name, value, exp) {
-    const date = new Date();
-    date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
-    document.cookie =
-      name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
-  };
+  // const setCookie = function (name, value, exp) {
+  //   const date = new Date();
+  //   date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+  //   document.cookie =
+  //     name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
+  // };
 
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
@@ -34,7 +34,7 @@ export default function Signin({ handleResponseSuccess }) {
           password: loginInfo.password,
         })
         .then((res) => {
-          setCookie("accesstoken", res.data.accesstoken, 1);
+          // setCookie("accesstoken", res.data.accesstoken, 1);
           handleResponseSuccess();
           navigate("/main");
         });

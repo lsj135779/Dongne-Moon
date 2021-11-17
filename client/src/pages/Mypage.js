@@ -73,7 +73,7 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
       navigate("/main");
     });
   };
-
+  let style = { width: "50px", height: "50px" };
   return (
     <>
       <Header
@@ -88,7 +88,9 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
               <div className="member-box">
                 <div className="top-master">
                   <div className="top-name">
-                    <div className="profile"></div>
+                    <div className="profile">
+                      <img src=" 사용자.png" style={style} />
+                    </div>
                   </div>
                   <div className="top-text">
                     <input
@@ -161,7 +163,9 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
               <div className="member-box">
                 <div className="top-master">
                   <div className="top-name">
-                    <div className="circle"></div>
+                    <div className="profile">
+                      <img src=" 사용자.png" style={style} />
+                    </div>
                   </div>
                   <div className="top-text">
                     <input

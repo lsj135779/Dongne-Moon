@@ -1,21 +1,23 @@
-import React from "react";
-import "./List.css";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import Post from "../components/Post";
+import "./List.css";
 
-export default function Main({
-  isLogin,
-  setIsLogin,
-  setUserinfo,
-  postHandler,
-  postContent,
-}) {
+export default function List({ isLogin, setIsLogin, setUserinfo }) {
   const navigate = useNavigate();
+  const [postContent, setPostContent] = useState([]);
 
   let { category } = useParams();
-  console.log(category);
+
+  useEffect(() => {
+    axios.get(`http://localhost:4000/post/${category}`).then((res) => {
+      setPostContent(res.data.data);
+      // console.log(postContent);
+    });
+  }, [category]);
 
   return (
     <>
@@ -24,40 +26,32 @@ export default function Main({
         setIsLogin={setIsLogin}
         setUserinfo={setUserinfo}
       />
-
       <div>
         <div clalssName="menu-master">
           <div className="menu-wrap">
             <div className="menu-box">
               <div className="menu-material">
                 <Link to="/post=all">
-                  <p
-                    className="menu-font"
-                    onClick={() => {
-                      postHandler();
-                    }}
-                  >
-                    둘러보기
-                  </p>
+                  <p className="menu-font">둘러보기</p>
                 </Link>
               </div>
               <div className="menu-material">
-                <Link to="/post=hobby">
+                <Link to="/post=취미">
                   <p className="menu-font">취미</p>
                 </Link>
               </div>
               <div className="menu-material">
-                <Link to="/post=food">
+                <Link to="/post=맛집">
                   <p className="menu-font">맛집</p>
                 </Link>
               </div>
               <div className="menu-material">
-                <Link to="/post=pet">
+                <Link to="/post=반려동물">
                   <p className="menu-font">반려동물</p>
                 </Link>
               </div>
               <div className="menu-material">
-                <Link to="/post=dongne">
+                <Link to="/post=동네소식">
                   <p className="menu-font">동네소식</p>
                 </Link>
               </div>
@@ -67,41 +61,21 @@ export default function Main({
             </div>
           </div>
         </div>
-        <div className="feed-master">
-          <div className="feed-wrap">
-            <div className="feed">
-              <div className="subject-wrap">
-                <div className="subject">
-                  <p>취미</p>
-                </div>
-              </div>
-              <div className="content-wrap">
-                <div className="content">오늘 족구 한 판 하실분??</div>
-              </div>
-              <div className="address-date-wrap">
-                <div className="address">수영구</div>
-                <div className="date">21.11.14</div>
-              </div>
-              <div className="comment-wrap">
-                <div className="comment">댓글</div>
-              </div>
-            </div>
-            <div className="feed">
-              <div className="subject-wrap">
-                <div className="subject">
-                  <p>취미</p>
-                </div>
-              </div>
-              <div className="content-wrap">
-                <div className="content">오늘 족구 한 판 하실분??</div>
-              </div>
-              <div className="address-date-wrap">
-                <div className="address">수영구</div>
-                <div className="date">21.11.14</div>
-              </div>
-              <div className="comment-wrap">
-                <div className="comment">댓글</div>
-              </div>
+
+        {postContent.map((post, index) => (
+          <Post key={index} post={post} />
+        ))}
+        <div className="write-master">
+          <div className="write-wrap">
+            <div className="write-button"></div>
+            <div className="write-button"></div>
+            <div className="write-button"></div>
+            <div className="write-button"></div>
+            <div className="write-button">
+              {" "}
+              <Link to="/post/create">
+                <div className="write-action">글 작성</div>
+              </Link>
             </div>
           </div>
         </div>

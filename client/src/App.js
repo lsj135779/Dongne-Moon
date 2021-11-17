@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Home from "./pages/Home";
 import Main from "./pages/Main";
@@ -7,27 +7,26 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Mypage from "./pages/Mypage";
 import List from "./pages/List";
+import PostRead from "./pages/PostRead";
 import axios from "axios";
+
+axios.defaults.withCredentials = true;
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userinfo, setUserinfo] = useState("");
-  const [postContent, setPostContent] = useState();
 
-  const getCookie = function (name) {
-    const value = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
-  };
-  const accesstoken = getCookie("accesstoken");
+  // let { category } = useParams();
+  // const getCookie = function (name) {
+  //   const value = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+  // };
+  // const accesstoken = getCookie("accesstoken");
 
   const isAuthenticated = () => {
-    axios
-      .get("http://localhost:4000/user/info", {
-        headers: { accesstoken: accesstoken },
-      })
-      .then((res) => {
-        setUserinfo(res.data.data);
-        setIsLogin(true);
-      });
+    axios.get("http://localhost:4000/user/info").then((res) => {
+      setUserinfo(res.data.data);
+      setIsLogin(true);
+    });
   };
   const handleResponseSuccess = () => {
     isAuthenticated();
@@ -36,16 +35,10 @@ function App() {
     isAuthenticated();
   }, []);
 
-  const postHandler = () => {
-    axios.get("http://localhost:4000/post").then((res) => {
-      const data = res.data;
-      console.log(data);
-      setPostContent(data);
-    });
-  };
-  // const categoryHandler = () => {
-  //   axios.get(`http://localhost:4000/post/${}`).then((res) => {
-  //     console.log(res.data);
+  // const categoryHandler = (category) => {
+  //   axios.get(`http://localhost:4000/post/${category}`).then((res) => {
+  //     setPostContent(res.data.data);
+  //     console.log(postContent);
   //   });
   // };
 
@@ -92,8 +85,16 @@ function App() {
               isLogin={isLogin}
               setUserinfo={setUserinfo}
               setIsLogin={setIsLogin}
-              postHandler={postHandler}
-              postContent={postContent}
+            />
+          }
+        />
+        <Route
+          path="/post/read=:id"
+          element={
+            <PostRead
+              isLogin={isLogin}
+              setUserinfo={setUserinfo}
+              setIsLogin={setIsLogin}
             />
           }
         />
