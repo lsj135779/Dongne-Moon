@@ -1,11 +1,10 @@
 const { user } = require("../../models");
 const { verify } = require("jsonwebtoken");
+const { upload } = require('../upload');
 
 module.exports = async (req, res) => {
-  console.log(req.body);
-  console.log(req.cookies);
   const { intro } = req.body;
-  const token = req.cookies.accesstoken;
+  const token = req.headers.accesstoken;
   if (!token) {
     return res.status(403).json({ message: "fail" });
   } else {
@@ -28,7 +27,6 @@ module.exports = async (req, res) => {
         attributes: ["intro"],
       });
       return res.status(200).json({ data: userIntro, message: "ok" });
-      console.log(userIntro);
     }
   }
 };
