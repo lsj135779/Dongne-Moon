@@ -1,24 +1,56 @@
 import React, { useEffect, useState } from "react";
 import "./PostRead.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PostReply from "../components/PostReply";
 import styled from "styled-components";
 
-export default function PostRead() {
+axios.defaults.withCredentials = true;
+export default function PostRead({}) {
+  const reduxState = useSelector((state) => state.userReducer);
+  const { user, islogin } = reduxState;
   //   const navigate = useNavigate();
+  console.log(user.id);
   let { id } = useParams();
   const [postUser, setPostUser] = useState({});
-  const [post, setPost] = useState({});
+
   const [postReply, setPostReply] = useState([]);
+
+  const [post, setPost] = useState({});
+  const [replyWrite, setReplyWrite] = useState({
+    reply: "",
+  });
+
+  const handleInputValue = (key) => (e) => {
+    setReplyWrite({ ...replyWrite, [key]: e.target.value });
+    // console.log(replyWrite);
+  };
+
+  const header = {
+    accesstoken: localStorage.getItem("accesstoken"),
+  };
+
+  const createReply = () => {
+    axios
+      .post(
+        "http://localhost:4000/comment/create",
+        {
+          userId: post.userId,
+          contents: replyWrite.reply,
+          postId: post.id,
+        },
+        { headers: header }
+      )
+      .then((res) => {
+        setPostReply([...postReply, res.data.data]);
+      });
+  };
 
   useEffect(() => {
     axios.get(`http://localhost:4000/post/read/${id}`).then((res) => {
-      console.log(res.data.data);
-      console.log(res.data.data.postUser);
-
       setPostUser(res.data.data.postUser.user);
       setPost(res.data.data.postUser);
       setPostReply(res.data.data.modifiedPostView.comments);
@@ -42,9 +74,12 @@ export default function PostRead() {
                       <div>{postUser.nickname}</div>
                       <div className="reply-user-address">
                         <div className="reply-user-information">
-                          <span>{postUser.address.split(",")[1]}</span>
-                          <spam>{post.views}</spam>
+                          <span>{postUser.address}</span>
+                          <spam className="reply-user-views">
+                            조회수 {post.views}
+                          </spam>
                           <span className="reply-user-date">
+                            작성일{" "}
                             {new Date(post.createdAt).toLocaleDateString(
                               "ko-kr"
                             )}
@@ -74,13 +109,13 @@ export default function PostRead() {
                 <div className="reply-title">
                   <p className="reply-name">
                     <span>댓글</span>
-                    <span className="reply-count">{post.comment_cnt}</span>
+                    <span className="reply-count">{postReply.length}</span>
                   </p>
                 </div>
               </div>
               <div className="reply">
                 {postReply.map((reply, index) => (
-                  <PostReply key={index} reply={reply} />
+                  <PostReply user={user} key={index} reply={reply} />
                 ))}
               </div>
             </div>
@@ -88,8 +123,20 @@ export default function PostRead() {
             <div className="reply-input-master">
               <div className="reply-input-wrap">
                 <div className="reply-input">
-                  <div className="reply-content">거기 맛없던데여?</div>
-                  <div className="write-action">댓글 달기</div>
+                  <div className="reply-content">
+                    <input
+                      className="reply-write"
+                      onChange={handleInputValue("reply")}
+                    ></input>
+                  </div>
+                  <div
+                    className="reply-button"
+                    onClick={() => {
+                      createReply();
+                    }}
+                  >
+                    댓글 달기
+                  </div>
                 </div>
               </div>
             </div>

@@ -10,6 +10,7 @@ import Signin from "./pages/Signin";
 import Mypage from "./pages/Mypage";
 import List from "./pages/List";
 import PostRead from "./pages/PostRead";
+import PostWrite from "./pages/PostWrite";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
@@ -75,8 +76,9 @@ function App() {
         />
         <Route
           path="/post/read=:id"
-          element={<PostRead setUserinfo={setUserinfo} />}
+          element={<PostRead userinfo={userinfo} setUserinfo={setUserinfo} />}
         />
+        <Route path="/post/write" element={<PostWrite />} />
       </Routes>
     </BrowserRouter>
   );

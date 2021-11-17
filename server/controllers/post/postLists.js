@@ -27,13 +27,4 @@ module.exports = async (req, res) => {
             return res.status(404).json({ message: "fail" });
         }
     }
-  } else {
-    const postAll = await post.findAll({
-      include: {
-        model: user,
-        attributes: ["nickname", "address"],
-      },
-    });
-    return res.status(200).json({ data: postAll, message: "ok" });
-  }
 };
