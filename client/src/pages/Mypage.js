@@ -10,11 +10,12 @@ axios.defaults.withCredentials = true;
 
 export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
   const navigate = useNavigate();
-  console.log(userinfo);
   const [edit, setEdit] = useState(false);
-  const { nickname, email, address, intro, id } = userinfo;
+  const { nickname, email, address, intro, id, img } = userinfo;
+  const [thumbnail, isThumbnail] = useState(img);
   const [profile, setProfile] = useState({
     nickname: nickname,
+    img: img,
     email: email,
     address: address,
     intro: intro,
@@ -65,6 +66,7 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
     }
     setEdit(false);
   };
+
   const withdraw = () => {
     axios.delete("http://localhost:4000/user/withdrawal").then((res) => {
       alert("회원탈퇴!");
@@ -72,6 +74,33 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
       //   setUserinfo(null);
       navigate("/main");
     });
+  };
+
+  const photoChange = (e) => {
+    console.log('사진 제출')
+    e.target.nextSibling.click();
+  };
+
+  // 제출되었을 때의 로직
+  const PhotoSubmit = (e) => {
+    console.log('사진 업로드')
+    e.preventDefault();
+    // formData로 전송해야 multer가 알아 듣습니다.
+    const formData = new FormData();
+    formData.append("file", e.target.childNodes[1].files[0]);
+
+    axios.patch(`http://localhost:4000/user/img/${id}`, formData, {
+      header: {
+        "content-type": "multipart/form-data",
+      },
+    }).then((res) => {
+      console.log(res.data);
+      isThumbnail(res.data.data.img);
+      setUserinfo((userinfo) => ({
+        ...userinfo,
+        img: res.data.data.img,
+      }));
+    })
   };
 
   return (
@@ -88,7 +117,26 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
               <div className="member-box">
                 <div className="top-master">
                   <div className="top-name">
-                    <div className="profile"></div>
+                    <div className="profile">
+                      <img className="profile" src={`${img}`} alt="나만의 프로필 사진을 넣어보세요." />
+                    </div>
+                    <form
+                      classname="img-modify"
+                      encType="multipart/form-data"
+                      style={{ position: "relative" }}
+                      onSubmit={PhotoSubmit}
+                    >
+                      <input type="button" value="사진수정" onClick={photoChange}></input>
+                      <input
+                        type="file"
+                        name="file"
+                        id="file"
+                        accept="image/*"
+                        onChange={photoChange}
+                        style={{ display: "none" }}
+                      />
+                      <input type="submit" style={{ display: "none" }}></input>
+                    </form>
                   </div>
                   <div className="top-text">
                     <input
@@ -161,7 +209,9 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
               <div className="member-box">
                 <div className="top-master">
                   <div className="top-name">
-                    <div className="circle"></div>
+                    <div className="circle">
+                      <img className="circle" src={`${img}`} alt="썸네일" />
+                    </div>
                   </div>
                   <div className="top-text">
                     <input

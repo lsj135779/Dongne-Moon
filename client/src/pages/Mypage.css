@@ -31,9 +31,14 @@
 }
 .top-name {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 40%;
+}
+.img-modify {
+  justify-content: center;
+  margin-top: 10px;
 }
 .top-text {
   font-size: 11px;
