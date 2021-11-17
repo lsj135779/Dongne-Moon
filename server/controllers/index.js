@@ -3,9 +3,10 @@ const router = express.Router();
 const userCtrl = require("./user/userCtrl");
 const commentCtrl = require("./comment/commentCtrl");
 const postCtrl = require("./post/postCtrl");
+const { upload } = require('./upload');
 
 //user
-router.patch("/user/img/:id", userCtrl.modifyImg);
+router.patch("/user/img/:id", upload.single('file'), userCtrl.modifyImg);
 router.patch("/user/nickname/:id", userCtrl.modifyNickname);
 router.patch("/user/intro/:id", userCtrl.modifyIntro);
 router.post("/user/signup", userCtrl.signUp);
@@ -21,8 +22,6 @@ router.patch("/post/update/:id", postCtrl.modifyPost);
 router.delete("/post/delete/:id", postCtrl.removePost);
 router.get("/post/read/:id", postCtrl.post);
 router.get("/post/:category", postCtrl.postLists);
-router.get("/post", postCtrl.postLists);
-
 
 //comment
 router.get("/comment/read/:id", commentCtrl.commenterInfo);

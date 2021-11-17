@@ -1,5 +1,5 @@
 .signin-master {
-  flex-direction: row;
+  flex-direction: column;
   display: flex;
   height: 75%;
   width: 100%;
