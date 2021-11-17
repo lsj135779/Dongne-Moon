@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       salt: DataTypes.STRING,
-      img: { defaultValue: "", type: DataTypes.STRING },
+      img: { defaultValue: "https://dongne-moon-s3.s3.ap-northeast-2.amazonaws.com/uploads/1637135832845_%20mypage.png", type: DataTypes.STRING },
       address: DataTypes.STRING,
       intro: { defaultValue: "", type: DataTypes.STRING },
       nickname: { defaultValue: "User", type: DataTypes.STRING },

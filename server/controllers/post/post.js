@@ -6,100 +6,90 @@ module.exports = async (req, res) => {
   const token = req.headers.accesstoken;
   const postCommentUser = await post.findOne({
     where: {
-      id,
-    },
-    include: {
+
+      id
+    }, include: {
       model: comment,
-      attributes: ["contents"],
+      attributes: ["contents", "createdAt"],
       include: {
         model: user,
-        attributes: ["img", "nickname", "intro", "address", "createdAt"],
-      },
-    },
-  });
+        attributes: ["img", "nickname", "address"]
+      }
+    }
+  })
   const postUser = await post.findOne({
     where: {
-      id,
+      id
     },
     include: {
       model: user,
-      attributes: ["nickname", "address"],
-    },
-  });
+      attributes: ["nickname", "address"]
+    }
+  })
   if (!postCommentUser) {
     return res.status(404).json({ message: "fail" });
-  } else {
+  }
+  else {
     if (token) {
       const verified = verify(token, process.env.ACCESS_SECRET);
       if (verified.id === postCommentUser.userId) {
-        return res
-          .status(200)
-          .json({ data: { postCommentUser, postUser }, message: "ok" });
+        return res.status(200).json({ data: { postCommentUser, postUser }, message: "ok" })
       } else {
-        await post.update(
-          { views: postCommentUser.views + 1 },
+        await post.update({ views: postCommentUser.views + 1 },
           {
-            where: { id },
-          }
-        );
+            where:
+              { id }
+          })
         const modifiedPostView = await post.findOne({
           where: {
-            id,
-          },
-          include: {
+            id
+          }, include: {
             model: comment,
             attributes: ["contents", "createdAt"],
             include: {
               model: user,
-              attributes: ["img", "nickname", "address", "createdAt"],
-            },
-          },
-        });
+              attributes: ["img", "nickname", "address"]
+            }
+          }
+        })
         const postUser = await post.findOne({
           where: {
-            id,
+            id
           },
           include: {
             model: user,
-            attributes: ["nickname", "address"],
-          },
-        });
-        return res
-          .status(200)
-          .json({ data: { modifiedPostView, postUser }, message: "ok" });
+            attributes: ["nickname", "address"]
+          }
+        })
+        return res.status(200).json({ data: { modifiedPostView, postUser }, message: "ok" });
       }
     } else {
-      await post.update(
-        { views: postCommentUser.views + 1 },
+      await post.update({ views: postCommentUser.views + 1 },
         {
-          where: { id },
-        }
-      );
+          where: { id }
+        })
       const modifiedPostView = await post.findOne({
         where: {
-          id,
-        },
-        include: {
+          id
+        }, include: {
           model: comment,
           attributes: ["contents", "createdAt"],
           include: {
             model: user,
-            attributes: ["img", "nickname", "address"],
-          },
-        },
-      });
+            attributes: ["img", "nickname", "address"]
+          }
+        }
+      })
       const postUser = await post.findOne({
         where: {
-          id,
+          id
         },
         include: {
           model: user,
-          attributes: ["nickname", "address"],
-        },
-      });
-      return res
-        .status(200)
-        .json({ data: { modifiedPostView, postUser }, message: "ok" });
+          attributes: ["nickname", "address"]
+        }
+      })
+      return res.status(200).json({ data: { modifiedPostView, postUser }, message: "ok" });
     }
   }
-};
+}

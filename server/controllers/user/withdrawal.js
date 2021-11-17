@@ -4,7 +4,7 @@ const { verify } = require("jsonwebtoken");
 module.exports = async (req, res) => {
   const token = req.headers.accesstoken;
   if (!token) {
-    return res.status(403).json({ message: "fail" });
+    return res.status(403).json({ message: "invalid token" });
   } else {
     const verified = verify(token, process.env.ACCESS_SECRET);
     if (!verified) {
@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
         },
       });
 
-      return res.clearCookie("accesstoken").status(200).json({ message: "ok" });
+      return res.status(200).json({ message: "ok" });
     }
   }
 };
