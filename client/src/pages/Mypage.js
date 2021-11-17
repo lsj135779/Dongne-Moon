@@ -10,15 +10,17 @@ import { useNavigate } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 
-export default function Mypage({}) {
+export default function Mypage({ }) {
   const reduxState = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const { user, islogin } = reduxState;
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
-  const { nickname, email, address, intro, id } = user;
+  const { nickname, email, address, intro, id, img } = user;
+  const [thumbnail, isThumbnail] = useState(img);
   const [profile, setProfile] = useState({
     nickname: nickname,
+    img: img,
     email: email,
     address: address,
     intro: intro,
@@ -86,6 +88,7 @@ export default function Mypage({}) {
     }
     setEdit(false);
   };
+
   const withdraw = () => {
     let url = {
       method: "delete",
@@ -103,6 +106,34 @@ export default function Mypage({}) {
         navigate("/main");
       });
   };
+
+  const photoChange = (e) => {
+    console.log('사진 제출')
+    e.target.nextSibling.click();
+  };
+
+  // 제출되었을 때의 로직
+  const PhotoSubmit = (e) => {
+    console.log('사진 업로드')
+    e.preventDefault();
+    // formData로 전송해야 multer가 알아 듣습니다.
+    const formData = new FormData();
+    formData.append("file", e.target.childNodes[1].files[0]);
+
+    axios.patch(`http://localhost:4000/user/img/${id}`, formData, {
+      header: {
+        "content-type": "multipart/form-data",
+      },
+    }).then((res) => {
+      console.log(res.data);
+      isThumbnail(res.data.data.img);
+      //   setUserinfo((userinfo) => ({
+      //     ...userinfo,
+      //     img: res.data.data.img,
+      //   }));
+    })
+  };
+
   let style = { width: "50px", height: "50px" };
   return (
     <>
@@ -115,65 +146,88 @@ export default function Mypage({}) {
                 <div className="top-master">
                   <div className="top-name">
                     <div className="profile">
-                      <img src=" 사용자.png" style={style} />
-                    </div>
-                  </div>
-                  <div className="top-text">
-                    <input
-                      type="text"
-                      defaultValue={intro}
-                      className="text-input-tick"
-                      onChange={handleInputValue("intro")}
-                    ></input>
-                  </div>
-                </div>
-                <div className="nick-master">
-                  <div className="nick-name">닉네임</div>
-                  <div className="nick-text">
-                    <input
-                      type="text"
-                      defaultValue={nickname}
-                      className="text-input"
-                      onChange={handleInputValue("nickname")}
-                    ></input>
-                  </div>
-                </div>
-                <div className="email-master1">
-                  <div className="email-name">이메일</div>
-                  <div className="email-text">
-                    <div className="text-input">{email}</div>
-                  </div>
-                </div>
-                <div className="address-master">
-                  <div className="address-name">주소</div>
-                  <div className="address-text">
-                    <div className="text-input">{address}</div>
-                  </div>
-                </div>
-                <div className="button-master">
-                  <div className="mypagebox">
-                    <div
-                      className="submitbutton"
-                      onClick={() => {
-                        editHandler();
-                      }}
+//current
+                      <img className="profile" src={`${img}`} alt="나만의 프로필 사진을 넣어보세요." />
+                    </div >
+                    <form
+                      classname="img-modify"
+                      encType="multipart/form-data"
+                      style={{ position: "relative" }}
+                      onSubmit={PhotoSubmit}
                     >
-                      수정
-                    </div>
-                    <div
-                      className="submitbutton"
-                      onClick={() => {
-                        setEdit(false);
-                      }}
-                    >
-                      취소
-                    </div>
+                      <input type="button" value="사진수정" onClick={photoChange}></input>
+                      <input
+                        type="file"
+                        name="file"
+                        id="file"
+                        accept="image/*"
+                        onChange={photoChange}
+                        style={{ display: "none" }}
+                      />
+                      <input type="submit" style={{ display: "none" }}></input>
+                    </form>
+//
+                    <img src=" 사용자.png" style={style} />
+                  </div>
+                    //인커밍
+
+                </div >
+                <div className="top-text">
+                  <input
+                    type="text"
+                    defaultValue={intro}
+                    className="text-input-tick"
+                    onChange={handleInputValue("intro")}
+                  ></input>
+                </div>
+              </div >
+              <div className="nick-master">
+                <div className="nick-name">닉네임</div>
+                <div className="nick-text">
+                  <input
+                    type="text"
+                    defaultValue={nickname}
+                    className="text-input"
+                    onChange={handleInputValue("nickname")}
+                  ></input>
+                </div>
+              </div>
+              <div className="email-master1">
+                <div className="email-name">이메일</div>
+                <div className="email-text">
+                  <div className="text-input">{email}</div>
+                </div>
+              </div>
+              <div className="address-master">
+                <div className="address-name">주소</div>
+                <div className="address-text">
+                  <div className="text-input">{address}</div>
+                </div>
+              </div>
+              <div className="button-master">
+                <div className="mypagebox">
+                  <div
+                    className="submitbutton"
+                    onClick={() => {
+                      editHandler();
+                    }}
+                  >
+                    수정
+                  </div>
+                  <div
+                    className="submitbutton"
+                    onClick={() => {
+                      setEdit(false);
+                    }}
+                  >
+                    취소
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+            </div >
+          </div >
+        </div >
+
       ) : (
         <div className="mypage">
           <div className="member-master">
@@ -181,8 +235,13 @@ export default function Mypage({}) {
               <div className="member-box">
                 <div className="top-master">
                   <div className="top-name">
+
                     <div className="profile">
-                      <img src=" 사용자.png" style={style} />
+                      <img className="profile" src={`${img}`} alt="썸네일" />
+                      {/* =======
+                    <div className="profile">
+      <img src=" 사용자.png" style={style} />
+>>>>>>> 110536819698a1fc2eae1111a9578daa9ee7f0cc */}
                     </div>
                   </div>
                   <div className="top-text">
@@ -190,7 +249,7 @@ export default function Mypage({}) {
                       {intro === "" ? "여러분의 일상을 공유해주세요" : intro}
                     </div>
                   </div>
-                </div>
+                </div >
                 <div className="nick-master">
                   <div className="nick-name">닉네임</div>
                   <div className="nick-text">
@@ -229,11 +288,12 @@ export default function Mypage({}) {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+              </div >
+            </div >
+          </div >
+        </div >
+      )
+      }
 
       <Footer />
     </>
