@@ -1,5 +1,5 @@
 module.exports = (req, res) => {
-  console.log(req.cookies);
+  console.log("signout;;;", req.cookies);
   try {
     res
       .status(205)

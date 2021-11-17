@@ -3,9 +3,9 @@ const { verify } = require("jsonwebtoken");
 
 module.exports = async (req, res) => {
   console.log(req.body);
-  console.log(req.cookies);
+  console.log(req.headers);
   const { intro } = req.body;
-  const token = req.cookies.accesstoken;
+  const token = req.headers.accesstoken;
   if (!token) {
     return res.status(403).json({ message: "fail" });
   } else {
