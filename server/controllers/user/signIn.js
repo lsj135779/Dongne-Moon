@@ -41,7 +41,6 @@ module.exports = async (req, res) => {
       createdAt,
     };
     const token = sign(payload, process.env.ACCESS_SECRET, { expiresIn: "1d" });
-
     return res.status(200).json({ accesstoken: token, message: "ok" });
   } else {
     return res.status(404).json({ message: "invalid user" });

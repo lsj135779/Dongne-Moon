@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../actions/index";
 import styled from "styled-components";
 import "./Header.css";
 import axios from "axios";
@@ -22,14 +24,16 @@ const Img = styled.img`
   width: ${(props) => props.width || "100px"};
 `;
 
-export default function Header({ isLogin, setUserinfo, setIsLogin }) {
+export default function Header({}) {
+  const reduxState = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+  const { user, islogin } = reduxState;
   const navigate = useNavigate();
-  const handleLogout = () => {
-    axios.post("http://localhost:4000/user/signout").then((res) => {
-      setIsLogin(false);
 
-      navigate("/main");
-    });
+  const handleLogout = () => {
+    dispatch(logout());
+    localStorage.removeItem("accesstoken");
+    navigate("/main");
   };
 
   return (
@@ -43,7 +47,7 @@ export default function Header({ isLogin, setUserinfo, setIsLogin }) {
               <Img src="5.svg" />
             </Link>
           </div>
-          {isLogin ? (
+          {islogin.islogin ? (
             <div className="header-material">
               <Link to="/mypage">
                 {" "}

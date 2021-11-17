@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { logout, patchIntro, patchNickname } from "../actions/index";
 import "./Mypage.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -8,11 +10,13 @@ import { useNavigate } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 
-export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
+export default function Mypage({}) {
+  const reduxState = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+  const { user, islogin } = reduxState;
   const navigate = useNavigate();
-  console.log(userinfo);
   const [edit, setEdit] = useState(false);
-  const { nickname, email, address, intro, id } = userinfo;
+  const { nickname, email, address, intro, id } = user;
   const [profile, setProfile] = useState({
     nickname: nickname,
     email: email,
@@ -24,40 +28,57 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
   };
   const editHandler = () => {
     if (profile.intro !== undefined) {
-      axios
-        .patch(
-          `http://localhost:4000/user/intro/${id}`,
-
-          {
-            intro: profile.intro,
-          }
-        )
+      let url = {
+        method: "patch",
+        url: `${process.env.REACT_APP_API_URL}/user/intro/${id}`,
+        headers: {
+          accesstoken: localStorage.getItem("accesstoken"),
+        },
+        data: {
+          intro: profile.intro,
+        },
+      };
+      axios(url)
         .then((res) => {
-          console.log(res.data.data.intro);
-          setUserinfo((userinfo) => ({
-            ...userinfo,
-            intro: res.data.data.intro,
-          }));
+          // console.log("res.data.data;;;", res.data.data);
+          dispatch(patchIntro(res.data.data.intro));
+
+          // setUserinfo((userinfo) => ({
+          //   ...userinfo,
+          //   intro: res.data.data.intro,
+          // }));
         })
         .catch((err) => {
           console.log(err);
         });
     }
     if (profile.nickname !== undefined) {
-      axios
-        .patch(
-          `http://localhost:4000/user/nickname/${id}`,
+      let url = {
+        method: "patch",
+        url: `${process.env.REACT_APP_API_URL}/user/nickname/${id}`,
+        headers: {
+          accesstoken: localStorage.getItem("accesstoken"),
+        },
+        data: {
+          nickname: profile.nickname,
+        },
+      };
+      axios(url)
+        // .patch(
+        //   `${process.env.REACT_APP_API_URL}/user/nickname/${id}`,
 
-          {
-            nickname: profile.nickname,
-          }
-        )
+        //   {
+        //     nickname: profile.nickname,
+        //   }
+        // )
         .then((res) => {
-          console.log(res.data.data.nickname);
-          setUserinfo((userinfo) => ({
-            ...userinfo,
-            nickname: res.data.data.nickname,
-          }));
+          // console.log("res.data.data.nickname;;", res.data.data.nickname);
+          dispatch(patchNickname(res.data.data.nickname));
+
+          // setUserinfo((userinfo) => ({
+          //   ...userinfo,
+          //   nickname: res.data.data.nickname,
+          // }));
         })
         .catch((err) => {
           console.log(err);
@@ -66,21 +87,26 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
     setEdit(false);
   };
   const withdraw = () => {
-    axios.delete("http://localhost:4000/user/withdrawal").then((res) => {
-      alert("회원탈퇴!");
-      setIsLogin(false);
-      //   setUserinfo(null);
-      navigate("/main");
-    });
+    let url = {
+      method: "delete",
+      url: `${process.env.REACT_APP_API_URL}/user/withdrawal`,
+      headers: {
+        accesstoken: localStorage.getItem("accesstoken"),
+      },
+    };
+    axios(url)
+      // .delete(`${process.env.REACT_APP_API_URL}/user/withdrawal`)
+      .then((res) => {
+        alert("회원탈퇴!");
+        dispatch(logout());
+        //   setUserinfo(null);
+        navigate("/main");
+      });
   };
-
+  let style = { width: "50px", height: "50px" };
   return (
     <>
-      <Header
-        isLogin={isLogin}
-        setIsLogin={setIsLogin}
-        setUserinfo={setUserinfo}
-      />
+      <Header />
       {edit ? (
         <div className="mypage">
           <div className="member-master">
@@ -88,7 +114,9 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
               <div className="member-box">
                 <div className="top-master">
                   <div className="top-name">
-                    <div className="profile"></div>
+                    <div className="profile">
+                      <img src=" 사용자.png" style={style} />
+                    </div>
                   </div>
                   <div className="top-text">
                     <input
@@ -113,21 +141,13 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
                 <div className="email-master1">
                   <div className="email-name">이메일</div>
                   <div className="email-text">
-                    <input
-                      type="text"
-                      value={email}
-                      className="text-input"
-                    ></input>
+                    <div className="text-input">{email}</div>
                   </div>
                 </div>
                 <div className="address-master">
                   <div className="address-name">주소</div>
                   <div className="address-text">
-                    <input
-                      type="text"
-                      value={address}
-                      className="text-input"
-                    ></input>
+                    <div className="text-input">{address}</div>
                   </div>
                 </div>
                 <div className="button-master">
@@ -161,49 +181,32 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
               <div className="member-box">
                 <div className="top-master">
                   <div className="top-name">
-                    <div className="circle"></div>
+                    <div className="profile">
+                      <img src=" 사용자.png" style={style} />
+                    </div>
                   </div>
                   <div className="top-text">
-                    <input
-                      type="text"
-                      value={
-                        userinfo.intro === ""
-                          ? "여러분의 일상을 공유해주세요"
-                          : intro
-                      }
-                      className="text-input-tick"
-                    ></input>
+                    <div className="text-input-tick">
+                      {intro === "" ? "여러분의 일상을 공유해주세요" : intro}
+                    </div>
                   </div>
                 </div>
                 <div className="nick-master">
                   <div className="nick-name">닉네임</div>
                   <div className="nick-text">
-                    <input
-                      type="text"
-                      value={nickname}
-                      className="text-input"
-                      onChange={handleInputValue("nickname")}
-                    ></input>
+                    <div className="text-input">{nickname}</div>
                   </div>
                 </div>
                 <div className="email-master1">
                   <div className="email-name">이메일</div>
                   <div className="email-text">
-                    <input
-                      type="text"
-                      value={email}
-                      className="text-input"
-                    ></input>
+                    <div className="text-input">{email}</div>
                   </div>
                 </div>
                 <div className="address-master">
                   <div className="address-name">주소</div>
                   <div className="address-text">
-                    <input
-                      type="text"
-                      value={address}
-                      className="text-input"
-                    ></input>
+                    <div className="text-input">{address}</div>
                   </div>
                 </div>
                 <div className="button-master">

@@ -6,6 +6,7 @@ module.exports = async (req, res) => {
   const token = req.headers.accesstoken;
   const postCommentUser = await post.findOne({
     where: {
+
       id
     }, include: {
       model: comment,

@@ -23,7 +23,6 @@ router.delete("/post/delete/:id", postCtrl.removePost);
 router.get("/post/read/:id", postCtrl.post);
 router.get("/post/:category", postCtrl.postLists);
 
-
 //comment
 router.get("/comment/read/:id", commentCtrl.commenterInfo);
 router.post("/comment/create", commentCtrl.writeComment);
