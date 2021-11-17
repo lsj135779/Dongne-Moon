@@ -1,0 +1,109 @@
+.feed-master {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.feed-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 30px 0 0 0; */
+  /* margin-bottom: 6%; */
+}
+.feed {
+  min-width: 450px;
+  max-width: 800px;
+  width: 30%;
+  height: 200px;
+  border-radius: 20px;
+  border: 3px solid #fccda3;
+  background-color: white;
+  margin-bottom: 20px;
+}
+.subject-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  /* position: relative; */
+  margin-left: 5%;
+}
+.subject {
+  background-color: #fccda3;
+  border-radius: 20px;
+  width: 15%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* position: absolute; */
+  left: 5%;
+  top: 40%;
+}
+.content-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  position: relative;
+}
+.content {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* position: absolute; */
+  margin-left: 8%;
+}
+.address-date-wrap {
+  display: flex;
+  justify-content: space-around;
+  /* align-items: center; */
+  width: 100%;
+  height: 25%;
+}
+.address {
+  /* display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center; */
+  width: 50%;
+  height: 100%;
+  /* left: 5%; */
+  /* margin-right: 10px; */
+}
+.getdate {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  right: 5%;
+}
+.comment-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  position: relative;
+}
+.comment {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* position: absolute; */
+  /* left: 5%; */
+  margin-left: 8%;
+}

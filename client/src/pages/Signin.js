@@ -3,7 +3,6 @@ import "./Signin.css";
 import Footer from "../components/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
 axios.defaults.withCredentials = true;
 
 export default function Signin({ handleResponseSuccess }) {
@@ -27,6 +26,7 @@ export default function Signin({ handleResponseSuccess }) {
           password: loginInfo.password,
         })
         .then((res) => {
+          localStorage.setItem("accesstoken", res.data.token);
           handleResponseSuccess();
           navigate("/main");
         });

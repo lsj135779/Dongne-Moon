@@ -6,11 +6,7 @@ import Footer from "../components/Footer";
 export default function Main({ isLogin, setIsLogin, setUserinfo }) {
   return (
     <>
-      <Header
-        isLogin={isLogin}
-        setIsLogin={setIsLogin}
-        setUserinfo={setUserinfo}
-      />
+      <Header setUserinfo={setUserinfo} />
       <Category_Hobby />
       <Footer />
     </>

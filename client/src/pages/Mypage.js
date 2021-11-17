@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { logout, patchIntro, patchNickname } from "../actions/index";
 import "./Mypage.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -8,11 +10,13 @@ import { useNavigate } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 
-export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
+export default function Mypage({}) {
+  const reduxState = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+  const { user, islogin } = reduxState;
   const navigate = useNavigate();
-  console.log(userinfo);
   const [edit, setEdit] = useState(false);
-  const { nickname, email, address, intro, id } = userinfo;
+  const { nickname, email, address, intro, id } = user;
   const [profile, setProfile] = useState({
     nickname: nickname,
     email: email,
@@ -24,40 +28,57 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
   };
   const editHandler = () => {
     if (profile.intro !== undefined) {
-      axios
-        .patch(
-          `${process.env.REACT_APP_API_URL}/user/intro/${id}`,
-
-          {
-            intro: profile.intro,
-          }
-        )
+      let url = {
+        method: "patch",
+        url: `${process.env.REACT_APP_API_URL}/user/intro/${id}`,
+        headers: {
+          accesstoken: localStorage.getItem("accesstoken"),
+        },
+        data: {
+          intro: profile.intro,
+        },
+      };
+      axios(url)
         .then((res) => {
-          console.log(res.data.data.intro);
-          setUserinfo((userinfo) => ({
-            ...userinfo,
-            intro: res.data.data.intro,
-          }));
+          // console.log("res.data.data;;;", res.data.data);
+          dispatch(patchIntro(res.data.data.intro));
+
+          // setUserinfo((userinfo) => ({
+          //   ...userinfo,
+          //   intro: res.data.data.intro,
+          // }));
         })
         .catch((err) => {
           console.log(err);
         });
     }
     if (profile.nickname !== undefined) {
-      axios
-        .patch(
-          `${process.env.REACT_APP_API_URL}/user/nickname/${id}`,
+      let url = {
+        method: "patch",
+        url: `${process.env.REACT_APP_API_URL}/user/nickname/${id}`,
+        headers: {
+          accesstoken: localStorage.getItem("accesstoken"),
+        },
+        data: {
+          nickname: profile.nickname,
+        },
+      };
+      axios(url)
+        // .patch(
+        //   `${process.env.REACT_APP_API_URL}/user/nickname/${id}`,
 
-          {
-            nickname: profile.nickname,
-          }
-        )
+        //   {
+        //     nickname: profile.nickname,
+        //   }
+        // )
         .then((res) => {
-          console.log(res.data.data.nickname);
-          setUserinfo((userinfo) => ({
-            ...userinfo,
-            nickname: res.data.data.nickname,
-          }));
+          // console.log("res.data.data.nickname;;", res.data.data.nickname);
+          dispatch(patchNickname(res.data.data.nickname));
+
+          // setUserinfo((userinfo) => ({
+          //   ...userinfo,
+          //   nickname: res.data.data.nickname,
+          // }));
         })
         .catch((err) => {
           console.log(err);
@@ -66,11 +87,18 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
     setEdit(false);
   };
   const withdraw = () => {
-    axios
-      .delete(`${process.env.REACT_APP_API_URL}/user/withdrawal`)
+    let url = {
+      method: "delete",
+      url: `${process.env.REACT_APP_API_URL}/user/withdrawal`,
+      headers: {
+        accesstoken: localStorage.getItem("accesstoken"),
+      },
+    };
+    axios(url)
+      // .delete(`${process.env.REACT_APP_API_URL}/user/withdrawal`)
       .then((res) => {
         alert("회원탈퇴!");
-        setIsLogin(false);
+        dispatch(logout());
         //   setUserinfo(null);
         navigate("/main");
       });
@@ -78,11 +106,7 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
 
   return (
     <>
-      <Header
-        isLogin={isLogin}
-        setIsLogin={setIsLogin}
-        setUserinfo={setUserinfo}
-      />
+      <Header />
       {edit ? (
         <div className="mypage">
           <div className="member-master">
@@ -169,9 +193,7 @@ export default function Mypage({ userinfo, isLogin, setUserinfo, setIsLogin }) {
                     <input
                       type="text"
                       value={
-                        userinfo.intro === ""
-                          ? "여러분의 일상을 공유해주세요"
-                          : intro
+                        intro === "" ? "여러분의 일상을 공유해주세요" : intro
                       }
                       className="text-input-tick"
                     ></input>

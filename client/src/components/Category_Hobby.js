@@ -1,5 +1,6 @@
 import React from "react";
 import "./Category_Hobby.css";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Category_Hobby() {
@@ -7,7 +8,7 @@ export default function Category_Hobby() {
     <div className="main">
       <div className="left-square">
         <div className="up-left-square">
-          <Link to={"/post/hobby"}>
+          <Link to={"/post=취미"}>
             <div className="big-square memo">
               <div className="container">
                 <div className="pic">
@@ -24,7 +25,7 @@ export default function Category_Hobby() {
           </Link>
         </div>
         <div className="down-left-square">
-          <Link to={"/post/food"}>
+          <Link to={"/post=맛집"}>
             <div className="big-square memo">
               <div className="container">
                 <div className="pic">
@@ -37,7 +38,7 @@ export default function Category_Hobby() {
         </div>
       </div>
       <div className="mid-circle">
-        <Link to={"/post"}>
+        <Link to={"/post=all"}>
           <div className="mabbe-circle">
             <div className="circle">둘러보기</div>
           </div>
@@ -45,7 +46,7 @@ export default function Category_Hobby() {
       </div>
       <div className="right-square">
         <div className="up-right-square">
-          <Link to={"/post/pet"}>
+          <Link to={"/post=반려동물"}>
             <div className="big-square memo">
               <div className="container">
                 <div className="pic">
@@ -62,7 +63,7 @@ export default function Category_Hobby() {
           </Link>
         </div>
         <div className="down-right-square">
-          <Link to={"/post/dongne"}>
+          <Link to={"/post=동네소식"}>
             <div className="big-square memo">
               <div className="container">
                 <div className="pic">
