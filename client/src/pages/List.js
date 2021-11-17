@@ -15,6 +15,7 @@ export default function List({}) {
   const { posts } = reduxState;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [postContent, setPostContent] = useState([]);
 
   const [isOpen, setIsOpen] = useState(false);
   let { category } = useParams();
@@ -148,6 +149,24 @@ export default function List({}) {
           <Post key={index} post={post} />
         ))}
         {/* <Post /> */}
+
+        {postContent.map((post, index) => (
+          <Post key={index} post={post} />
+        ))}
+        <div className="write-master">
+          <div className="write-wrap">
+            <div className="write-button"></div>
+            <div className="write-button"></div>
+            <div className="write-button"></div>
+            <div className="write-button"></div>
+            <div className="write-button">
+              {" "}
+              <Link to="/post/create">
+                <div className="write-action">글 작성</div>
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
 
       <Footer />

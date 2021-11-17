@@ -8,7 +8,7 @@ export default function Category_Hobby() {
     <div className="main">
       <div className="left-square">
         <div className="up-left-square">
-          <Link to={"/post=취미"}>
+          <Link to={`/post=취미`}>
             <div className="big-square memo">
               <div className="container">
                 <div className="pic">

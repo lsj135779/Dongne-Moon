@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { axiosData, setUserInfo } from "./actions/index";
@@ -9,13 +9,15 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Mypage from "./pages/Mypage";
 import List from "./pages/List";
+import PostRead from "./pages/PostRead";
 import axios from "axios";
+axios.defaults.withCredentials = true;
+
 axios.defaults.withCredentials = true;
 
 function App() {
   const dispatch = useDispatch();
   const [userinfo, setUserinfo] = useState("");
-  const [postContent, setPostContent] = useState();
 
   const isAuthenticated = () => {
     if (localStorage.getItem("accesstoken")) {
@@ -69,7 +71,23 @@ function App() {
 
         <Route
           path="/post=:category"
-          element={<List setUserinfo={setUserinfo} />}
+          element={
+            <List
+              isLogin={isLogin}
+              setUserinfo={setUserinfo}
+              setIsLogin={setIsLogin}
+            />
+          }
+        />
+        <Route
+          path="/post/read=:id"
+          element={
+            <PostRead
+              isLogin={isLogin}
+              setUserinfo={setUserinfo}
+              setIsLogin={setIsLogin}
+            />
+          }
         />
       </Routes>
     </BrowserRouter>
