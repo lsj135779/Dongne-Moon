@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 
-export default function Mypage({ }) {
+export default function Mypage({}) {
   const reduxState = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const { user, islogin } = reduxState;
@@ -108,30 +108,32 @@ export default function Mypage({ }) {
   };
 
   const photoChange = (e) => {
-    console.log('사진 제출')
+    console.log("사진 제출");
     e.target.nextSibling.click();
   };
 
   // 제출되었을 때의 로직
   const PhotoSubmit = (e) => {
-    console.log('사진 업로드')
+    console.log("사진 업로드");
     e.preventDefault();
     // formData로 전송해야 multer가 알아 듣습니다.
     const formData = new FormData();
     formData.append("file", e.target.childNodes[1].files[0]);
 
-    axios.patch(`http://localhost:4000/user/img/${id}`, formData, {
-      header: {
-        "content-type": "multipart/form-data",
-      },
-    }).then((res) => {
-      console.log(res.data);
-      isThumbnail(res.data.data.img);
-      //   setUserinfo((userinfo) => ({
-      //     ...userinfo,
-      //     img: res.data.data.img,
-      //   }));
-    })
+    axios
+      .patch(`http://localhost:4000/user/img/${id}`, formData, {
+        header: {
+          "content-type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        isThumbnail(res.data.data.img);
+        //   setUserinfo((userinfo) => ({
+        //     ...userinfo,
+        //     img: res.data.data.img,
+        //   }));
+      });
   };
 
   let style = { width: "50px", height: "50px" };
@@ -146,16 +148,23 @@ export default function Mypage({ }) {
                 <div className="top-master">
                   <div className="top-name">
                     <div className="profile">
-//current
-                      <img className="profile" src={`${img}`} alt="나만의 프로필 사진을 넣어보세요." />
-                    </div >
+                      <img
+                        className="profile"
+                        src={`${img}`}
+                        alt="나만의 프로필 사진을 넣어보세요."
+                      />
+                    </div>
                     <form
                       classname="img-modify"
                       encType="multipart/form-data"
                       style={{ position: "relative" }}
                       onSubmit={PhotoSubmit}
                     >
-                      <input type="button" value="사진수정" onClick={photoChange}></input>
+                      <input
+                        type="button"
+                        value="사진수정"
+                        onClick={photoChange}
+                      ></input>
                       <input
                         type="file"
                         name="file"
@@ -166,12 +175,10 @@ export default function Mypage({ }) {
                       />
                       <input type="submit" style={{ display: "none" }}></input>
                     </form>
-//
+
                     <img src=" 사용자.png" style={style} />
                   </div>
-                    //인커밍
-
-                </div >
+                </div>
                 <div className="top-text">
                   <input
                     type="text"
@@ -180,7 +187,7 @@ export default function Mypage({ }) {
                     onChange={handleInputValue("intro")}
                   ></input>
                 </div>
-              </div >
+              </div>
               <div className="nick-master">
                 <div className="nick-name">닉네임</div>
                 <div className="nick-text">
@@ -224,10 +231,9 @@ export default function Mypage({ }) {
                   </div>
                 </div>
               </div>
-            </div >
-          </div >
-        </div >
-
+            </div>
+          </div>
+        </div>
       ) : (
         <div className="mypage">
           <div className="member-master">
@@ -235,13 +241,8 @@ export default function Mypage({ }) {
               <div className="member-box">
                 <div className="top-master">
                   <div className="top-name">
-
                     <div className="profile">
-                      <img className="profile" src={`${img}`} alt="썸네일" />
-                      {/* =======
-                    <div className="profile">
-      <img src=" 사용자.png" style={style} />
->>>>>>> 110536819698a1fc2eae1111a9578daa9ee7f0cc */}
+                      <img src=" 사용자.png" style={style} />
                     </div>
                   </div>
                   <div className="top-text">
@@ -249,7 +250,7 @@ export default function Mypage({ }) {
                       {intro === "" ? "여러분의 일상을 공유해주세요" : intro}
                     </div>
                   </div>
-                </div >
+                </div>
                 <div className="nick-master">
                   <div className="nick-name">닉네임</div>
                   <div className="nick-text">
@@ -288,12 +289,11 @@ export default function Mypage({ }) {
                     </div>
                   </div>
                 </div>
-              </div >
-            </div >
-          </div >
-        </div >
-      )
-      }
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </>

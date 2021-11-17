@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       views: { defaultValue: 0, type: DataTypes.INTEGER },
       img: { defaultValue: "", type: DataTypes.STRING },
       location: { defaultValue: "", type: DataTypes.STRING },
-      comment_cnt: { defaultValue: 0, type: DataTypes.INTEGER },
     },
     {
       sequelize,

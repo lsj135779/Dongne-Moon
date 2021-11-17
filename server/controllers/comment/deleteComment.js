@@ -2,6 +2,7 @@ const { comment } = require("../../models");
 const { verify } = require("jsonwebtoken");
 
 module.exports = async (req, res) => {
+  console.log(req.body);
   const id = req.params.id;
   const token = req.headers.accesstoken;
 
@@ -12,15 +13,20 @@ module.exports = async (req, res) => {
     if (!verified) {
       return res.status(403).json({ message: "invalid token" });
     } else {
-      try {
+      const commentUserId = await comment.findOne({
+        where: {
+          id,
+        },
+      });
+      if (verified.id !== commentUserId.userId) {
+        return res.status(404).json({ message: "fail to delete" });
+      } else {
         await comment.destroy({
           where: {
             id,
           },
         });
         return res.status(201).json({ message: "success to delete" });
-      } catch {
-        return res.status(404).json({ message: "fail to delete" });
       }
     }
   }

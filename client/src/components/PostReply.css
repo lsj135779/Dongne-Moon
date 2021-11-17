@@ -69,3 +69,10 @@
   justify-content: center;
   align-items: center;
 }
+
+.modal {
+  background-color: #ffffff;
+  width: 300px;
+  height: 100px;
+  color: #000000;
+}
