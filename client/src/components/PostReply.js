@@ -3,62 +3,83 @@ import "./PostReply.css";
 import axios from "axios";
 
 export default function PostReply({ reply, user }) {
-  console.log(reply);
+  // console.log(reply);
   const [clicked, isClicked] = useState(true);
+  const [commenterInfo, setCommenterInfo] = useState(null);
   const header = {
     accesstoken: localStorage.getItem("accesstoken"),
   };
   const style = { width: "30px", height: "30px" };
+
   const deleteComment = () => {
     axios.delete(
       `${process.env.REACT_APP_API_URL}/comment/delete/${reply.id}`,
       { headers: header }
     );
   };
-
-  const commenterInfo = () => {
-    isClicked(!clicked);
+  const date = new Date(reply.createdAt)
+    .toLocaleDateString("ko-kr")
+    .split("")
+    .splice(2)
+    .join("");
+  const getCommenterInfo = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/comment/read/${reply.id}/`)
+      .then((res) => {
+        setCommenterInfo(res.data.data);
+        console.log(res.data);
+        isClicked(!clicked);
+      });
   };
 
   return (
     <>
-      <div className="reply-main-wrap">
-        <div onClick={commenterInfo}>
-          {clicked ? (
-            <div>
-              <p>
-                <img src="사용자.png" style={style} alt="" />
-              </p>
-              <div className="reply-user-info">
-                <p>{reply.user.nickname}</p>
-                <div className="reply-user-address">
-                  <div className="reply-user-information">
-                    <span>{reply.user.address.split(",")[1]}</span>
-                    <span className="reply-user-date">
-                      {new Date(reply.createdAt).toLocaleDateString("ko-kr")}
-                    </span>
-                  </div>
+      {clicked ? (
+        <div className="reply-main-wrap">
+          <div className="commenterInfo" onClick={getCommenterInfo}>
+            <img src={`${reply.user.img}`} style={style} alt="" />
+            <div className="reply-user-info">
+              <div className="font-size-large">{reply.user.nickname}</div>
+              <div className="reply-user-address">
+                <div className="reply-user-information">
+                  {reply.user.address.split(",")[1]}
                 </div>
               </div>
             </div>
-          ) : (
-            <div className="modal" onClick={commenterInfo}>
-              {reply.user.intro}
+          </div>
+          <div className="reply-user-content">
+            <div className="reply-contents">{reply.contents}</div>
+            <div className="reply-user-date">
+              {date.split("").splice(0, 10).join("")}
             </div>
-          )}
+          </div>
+          <div className="reply-erase">
+            {user.id === reply.user.id ? (
+              <div className="delete-btn" onClick={deleteComment}>
+                삭제
+              </div>
+            ) : null}
+          </div>
         </div>
-
-        <div className="reply-user-content">
-          <p>{reply.contents}</p>
-        </div>
-        <div className="reply-erase">
-          {user.id === reply.user.id ? (
-            <div className="write-action" onClick={deleteComment}>
-              댓글 삭제
+      ) : (
+        <div
+          className="modal"
+          onClick={() => isClicked(!clicked)}
+          role="dialog"
+        >
+          <div className="commenterInfo-modal">
+            <img
+              src={commenterInfo.user.img}
+              style={style}
+              alt="commenterImg"
+            ></img>
+            <div className="commenterNickname">
+              {commenterInfo.user.nickname}
             </div>
-          ) : null}
+          </div>
+          <div className="commenterIntro">{commenterInfo.user.intro}</div>
         </div>
-      </div>
+      )}
     </>
   );
 }

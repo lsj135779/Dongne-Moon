@@ -3,13 +3,13 @@ import {
   LOGOUT,
   PATCH_INTRO,
   PATCH_NICKNAME,
+  PATCH_IMG,
 } from "../actions/index";
 import { initialState } from "./initialState";
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USERS:
-      // console.log("###########;;;", state);
       return {
         ...state,
         user: action.payload.user,
@@ -20,12 +20,17 @@ const userReducer = (state = initialState, action) => {
       return { ...state, islogin: { islogin: false } };
 
     case PATCH_INTRO:
-      // console.log("###########;;;", state);
-      return { ...state, user: { intro: action.payload.intro } };
+      return { ...state, user: { ...state.user, intro: action.payload.intro } };
 
     case PATCH_NICKNAME:
-      console.log("###########;;;", state);
-      return { ...state, user: { nickname: action.payload.nickname } };
+      return {
+        ...state,
+        user: { ...state.user, nickname: action.payload.nickname },
+      };
+
+    case PATCH_IMG:
+      console.log("###########img;;;", state);
+      return { ...state, user: { ...state.user, img: action.payload.img } };
 
     default:
       return state;

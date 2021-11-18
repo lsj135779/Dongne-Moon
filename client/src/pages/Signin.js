@@ -73,8 +73,8 @@ export default function Signin({ handleResponseSuccess }) {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 }
