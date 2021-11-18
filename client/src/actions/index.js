@@ -11,7 +11,7 @@ export const PATCH_IMG = "PATCH_IMG";
 export const axiosData = (api, action) => (dispatch) => {
   return axios(api)
     .then((res) => {
-      console.log("axiosData;;;;;;", res.data.data);
+
       dispatch(action(res.data.data));
     })
     .catch((err) => console.log(err.response));

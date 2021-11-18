@@ -1,11 +1,21 @@
 import React, { useEffect, useState, useMemo } from "react";
 import "./PostWrite.css";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Select from "react-select";
+import { useSelector, useDispatch } from "react-redux";
+import { logout, patchIntro, patchNickname, patchImg } from "../actions/index";
+const logoImg = require("./../5.svg").default;
+
 export default function PostWrite() {
+
+  // const logopic = require('자산테스트.svg')
+  const reduxState = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+  const { user, islogin } = reduxState;
   const navigate = useNavigate();
   const [postWrite, setPostWrite] = useState({
     contents: "",
@@ -22,16 +32,21 @@ export default function PostWrite() {
   const createPost = () => {
     axios
       .post(
-        "http://localhost:4000/post/create",
+        `${process.env.REACT_APP_API_URL}/post/create`,
         {
-          userId: 1,
+          userId: user.id,
           category: selected.value,
           contents: postWrite.contents,
         },
         { headers: header }
       )
       .then((res) => {
-        alert("글 작성 완료!");
+        Swal.fire({
+          icon: "success",
+          title: "글 작성 완료!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate(`/post=${selected.value}`);
       });
   };
@@ -56,7 +71,7 @@ export default function PostWrite() {
         <div className="postwrite-material">
           <div className="logo">
             <Link to="/main">
-              <img src="자산 5.svg" alt="" className="signinlogo" />
+              <img src={logoImg} className="logo" />
             </Link>
           </div>
           <div className="postwrite-master">

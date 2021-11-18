@@ -16,7 +16,7 @@
 }
 .menu-box {
   /* margin-left: 245px; */
-
+  margin-top: 60px;
   min-width: 450px;
   max-width: 800px;
   margin-top: 60px;
@@ -83,7 +83,7 @@
   /* display: flex;
   justify-content: end; */
   position: fixed;
-  right: 100px;
+  right: 70px;
   bottom: 200px;
 }
 .write-action {
@@ -93,4 +93,5 @@
   padding: 10px;
   background: #fccda3;
   color: #2e1d0e;
+  cursor: pointer;
 }

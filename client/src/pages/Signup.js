@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
 import Footer from "../components/Footer";
 import DaumPostcode from "react-daum-postcode";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 export default function Signup() {
@@ -122,14 +123,29 @@ export default function Signup() {
           password: info.password,
         })
         .then((res) => {
-          console.log(res.data);
+          Swal.fire({
+            icon: "success",
+            title: "가입 완료",
+            showConfirmButton: false,
+            timer: 1500,
+          });
           navigate("/login");
         })
         .catch(() => {
-          alert("잘못된정보입니다");
+          Swal.fire({
+            icon: "error",
+            title: "잘못된정보입니다",
+            text: "",
+            footer: "",
+          });
         });
     } else {
-      alert("모든항목은 필수입니다");
+      Swal.fire({
+        icon: "error",
+        title: "모두 필수입니다...",
+        text: "",
+        footer: "",
+      });
     }
   };
 
@@ -187,7 +203,7 @@ export default function Signup() {
                   type="text"
                   className="input"
                   defaultValue={info.address}
-                  onClick={() => {
+                  onFocus={() => {
                     setIsOpenPost(true);
                   }}
                 ></input>

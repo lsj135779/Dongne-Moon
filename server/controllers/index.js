@@ -22,6 +22,7 @@ router.patch("/post/update/:id", postCtrl.modifyPost);
 router.delete("/post/delete/:id", postCtrl.removePost);
 router.get("/post/read/:id", postCtrl.post);
 router.get("/post/:category", postCtrl.postLists);
+router.post("/post/search", postCtrl.postSearch);
 
 //comment
 router.get("/comment/read/:id", commentCtrl.commenterInfo);

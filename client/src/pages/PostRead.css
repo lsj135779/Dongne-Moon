@@ -15,7 +15,7 @@
 .read-box {
   min-width: 600px;
   max-width: 740px;
-  margin-top: 50px;
+  margin-top: 100px;
   width: 800px;
   height: 800px;
   background-color: #ffdbc1;
@@ -52,6 +52,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: auto;
 }
 .post-main {
   width: 100%;
@@ -117,6 +118,7 @@
   padding: 10px;
   background: #fccda3;
   color: #2e1d0e;
+  cursor: pointer;
 }
 .reply-user-views {
   display: flex;
@@ -143,11 +145,24 @@
   width: 100%;
   align-items: center;
 }
-
 .user-nickName {
   font-size: larger;
   font-weight: bolder;
 }
 .user-info-wrap {
   width: 100%;
+}
+.modifiedContent {
+  overflow-y: hidden;
+  resize: none;
+  width: 90%;
+  height: 90%;
+  border: 1px solid gray;
+  outline: none;
+  border-radius: 2px;
+  line-height: 1.5rem;
+  font-size: 15px;
+}
+.contentdetails {
+  margin: 0;
 }

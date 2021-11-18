@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
     },
     include: {
       model: user,
-      attributes: ["nickname", "address"],
+      attributes: ["nickname", "address", "img"],
     },
   });
   if (!postCommentUser) {
@@ -61,7 +61,7 @@ module.exports = async (req, res) => {
           },
           include: {
             model: user,
-            attributes: ["nickname", "address"],
+            attributes: ["nickname", "address", "img"],
           },
         });
         return res
@@ -94,7 +94,7 @@ module.exports = async (req, res) => {
         },
         include: {
           model: user,
-          attributes: ["nickname", "address"],
+          attributes: ["nickname", "address", "img"],
         },
       });
       return res

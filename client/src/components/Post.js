@@ -21,7 +21,7 @@ export default function Post({ post }) {
                 <div className="address-date-wrap">
                   <div>{post.user.nickname}</div>
                   <div className="address">
-                    {post.user.address.split(" ")[2]}
+                    {post.user.address.split(",")[1]}
                   </div>
                 </div>
                 <div className="comment-wrap">
