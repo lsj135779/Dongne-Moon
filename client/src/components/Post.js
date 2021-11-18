@@ -3,6 +3,7 @@ import "./Post.css";
 import { Link } from "react-router-dom";
 
 export default function Post({ post }) {
+
   return (
     <>
       <div>
@@ -16,12 +17,12 @@ export default function Post({ post }) {
                   </div>
                 </div>
                 <div className="content-wrap">
-                  <div className="content">{post.contents}</div>
+                  <div className="content">{post.contents.length >= 20 ? `${post.contents.slice(0, 20)}...` : `${post.contents}`}</div>
                 </div>
                 <div className="address-date-wrap">
                   <div>{post.user.nickname}</div>
                   <div className="address">
-                    {post.user.address.split(" ")[2]}
+                    {post.user.address.split(",")[1]}
                   </div>
                 </div>
                 <div className="comment-wrap">

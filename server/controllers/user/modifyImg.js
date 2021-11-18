@@ -2,11 +2,9 @@ const { user } = require("../../models");
 const { verify } = require("jsonwebtoken");
 
 module.exports = async (req, res) => {
-  console.log(req.file);
   const filePath = req.file.location;
   const id = req.params.id;
   const token = req.headers.accesstoken;
-
   if (!token) {
     return res.status(403).json({ message: "fail" });
   } else {

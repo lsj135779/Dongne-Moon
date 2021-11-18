@@ -3,6 +3,7 @@ import "./Signin.css";
 import Footer from "../components/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 axios.defaults.withCredentials = true;
 
 export default function Signin({ handleResponseSuccess }) {
@@ -18,7 +19,12 @@ export default function Signin({ handleResponseSuccess }) {
 
   const handleLogin = () => {
     if (loginInfo.email.length === 0 || loginInfo.password.length === 0) {
-      alert("회원정보를 입력해 주세요");
+      Swal.fire({
+        icon: "error",
+        title: "회원정보를 입력해 주세요",
+        text: "",
+        footer: "",
+      });
     } else {
       axios
         .post(`${process.env.REACT_APP_API_URL}/user/signin`, {
@@ -29,7 +35,14 @@ export default function Signin({ handleResponseSuccess }) {
           localStorage.setItem("accesstoken", res.data.token);
           handleResponseSuccess();
           navigate("/main");
-        });
+        }).catch(() => {
+          Swal.fire({
+            icon: "error",
+            title: "잘못된 정보입니다",
+            text: "",
+            footer: "",
+          });
+        })
     }
   };
 
@@ -39,7 +52,7 @@ export default function Signin({ handleResponseSuccess }) {
         <div className="signin-material">
           <div className="logo">
             <Link to="/main">
-              <img src="자산 5.svg" alt="" className="signinlogo" />
+              <img src={require("../images/5.svg").default} alt="" className="signinlogo" />
             </Link>
           </div>
           <div className="signin-master">
