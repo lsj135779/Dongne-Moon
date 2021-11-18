@@ -2,7 +2,6 @@ const { post, comment, user } = require("../../models");
 const { verify } = require("jsonwebtoken");
 
 module.exports = async (req, res) => {
-  console.log(req.body);
   const { userId, contents, postId } = req.body;
   const token = req.headers.accesstoken;
   if (!userId || !contents || !postId) {

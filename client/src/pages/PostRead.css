@@ -164,5 +164,6 @@
   font-size: 15px;
 }
 .contentdetails {
-  margin: 0;
+  margin-left: 20px;
+  word-break: break-all;
 }

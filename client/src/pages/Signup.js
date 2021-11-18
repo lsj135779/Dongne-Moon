@@ -108,7 +108,6 @@ export default function Signup() {
   };
 
   const isSignup = () => {
-    console.log("checkInfo;;;", checkInfo);
     if (
       checkInfo.email &&
       checkInfo.duplicate &&
@@ -166,11 +165,10 @@ export default function Signup() {
         </div>
       ) : null}
       <div className="signup-master">
-        {/* <div className="signup-material"></div> */}
         <div className="signup-material">
           <div className="logo">
             <Link to="/main">
-              <img src="5.svg" alt="" className="signuplogo" />
+              <img src={require("../images/5.svg").default} alt="" className="signuplogo" />
             </Link>
           </div>
           <div className="signup-form">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./PostRead.css";
+import Swal from "sweetalert2";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
@@ -26,7 +27,6 @@ export default function PostRead({ }) {
 
   const handleInputValue = (key) => (e) => {
     setReplyWrite({ ...replyWrite, [key]: e.target.value });
-    // console.log(replyWrite);
   };
 
   const header = {
@@ -57,8 +57,12 @@ export default function PostRead({ }) {
         headers: header,
       })
       .then((res) => {
-        console.log(res.data);
-        alert("글 삭제 완료");
+        Swal.fire({
+          icon: "success",
+          title: "글 삭제 완료",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate("/post=all");
       });
   };
@@ -156,12 +160,10 @@ export default function PostRead({ }) {
                 </div>
               </div>
               <div className="reply-master">
-                {/* <div className="reply-wrap"> */}
                 <p className="reply-name">
                   <span>댓글</span>
                   <span className="reply-count">{postReply.length}</span>
                 </p>
-                {/* </div> */}
                 <div className="reply">
                   {postReply.map((reply, index) => (
                     <PostReply user={user} key={index} reply={reply} setPostReply={setPostReply} />
@@ -175,7 +177,7 @@ export default function PostRead({ }) {
                     <div className="reply-content">
                       <input
                         ref={inputRef}
-                        value={""}
+                        defaultValue={""}
                         className="reply-write"
                         onChange={handleInputValue("reply")}
                       ></input>

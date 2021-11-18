@@ -37,10 +37,9 @@ export default function List({ }) {
     }
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/post/search?page=${page}`, {
+      .post(`${process.env.REACT_APP_API_URL}/post/search?`, {
         keyword: keyword,
       }).then((res) => {
-        console.log(res.data.data)
         setKeyword("")
         setPostContent(res.data.data);
         setIsData(false)
@@ -50,13 +49,6 @@ export default function List({ }) {
 
 
   }
-  // useEffect(() => {
-  //   axios
-  //     .get(`${process.env.REACT_APP_API_URL}/post/${category}`)
-  //     .then((res) => {
-  //       setPostContent(res.data.data);
-  //     });
-  // }, [category]);
 
   const getItems = useCallback(async () => {
     setLoading(true);

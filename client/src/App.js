@@ -14,8 +14,6 @@ import PostWrite from "./pages/PostWrite";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-axios.defaults.withCredentials = true;
-
 function App() {
   const dispatch = useDispatch();
   const [userinfo, setUserinfo] = useState("");
@@ -38,20 +36,6 @@ function App() {
   useEffect(() => {
     isAuthenticated();
   }, []);
-
-  // const postHandler = () => {
-  //   axios.get(`${process.env.REACT_APP_API_URL}/post`).then((res) => {
-  //     const data = res.data;
-  //     console.log(data);
-  //     setPostContent(data);
-  //   });
-  // };
-
-  // const categoryHandler = () => {
-  //   axios.get(`${process.env.REACT_APP_API_URL}/${}`).then((res) => {
-  //     console.log(res.data);
-  //   });
-  // };
 
   return (
     <BrowserRouter>

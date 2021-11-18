@@ -52,7 +52,7 @@ export default function Signin({ handleResponseSuccess }) {
         <div className="signin-material">
           <div className="logo">
             <Link to="/main">
-              <img src="자산 5.svg" alt="" className="signinlogo" />
+              <img src={require("../images/5.svg").default} alt="" className="signinlogo" />
             </Link>
           </div>
           <div className="signin-master">
