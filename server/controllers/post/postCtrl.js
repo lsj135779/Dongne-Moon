@@ -3,5 +3,6 @@ module.exports = {
     modifyPost: require("./modifyPost"),
     writePost: require("./writePost"),
     post: require("./post"),
-    postLists: require("./postLists")
+    postLists: require("./postLists"),
+    postSearch: require("./postSearch")
 }

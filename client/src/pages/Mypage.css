@@ -55,6 +55,7 @@
   height: 15%;
 }
 .nick-name {
+  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,7 +64,7 @@
 }
 .nick-text {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 60%;
 }
@@ -130,6 +131,9 @@
   height: 100%;
 }
 .text-input {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   width: 80%;
   height: 50px;
   border: 1px solid gray;
@@ -138,8 +142,14 @@
 .text-input-tick {
   width: 80%;
   height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   border: 1px solid gray;
   border-radius: 2px;
+}
+.intro-array {
+  font-size: medium;
 }
 
 .button-input {

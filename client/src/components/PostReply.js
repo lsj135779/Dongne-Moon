@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./PostReply.css";
 import axios from "axios";
 
-export default function PostReply({ reply, user }) {
+export default function PostReply({ reply, user, setPostReply }) {
   // console.log(reply);
   const [clicked, isClicked] = useState(true);
   const [commenterInfo, setCommenterInfo] = useState(null);
@@ -15,7 +15,9 @@ export default function PostReply({ reply, user }) {
     axios.delete(
       `${process.env.REACT_APP_API_URL}/comment/delete/${reply.id}`,
       { headers: header }
-    );
+    ).then(res => {
+      setPostReply([...res.data.data.comments]);
+    })
   };
   const date = new Date(reply.createdAt)
     .toLocaleDateString("ko-kr")

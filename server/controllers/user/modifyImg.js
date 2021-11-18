@@ -6,7 +6,6 @@ module.exports = async (req, res) => {
   const filePath = req.file.location;
   const id = req.params.id;
   const token = req.headers.accesstoken;
-
   if (!token) {
     return res.status(403).json({ message: "fail" });
   } else {

@@ -7,17 +7,17 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 axios.defaults.withCredentials = true;
 
-export default function Mypage({}) {
+export default function Mypage({ }) {
   const reduxState = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const { user, islogin } = reduxState;
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
   const { nickname, email, address, intro, id, img } = user;
-  const [thumbnail, isThumbnail] = useState(img);
   const [profile, setProfile] = useState({
     nickname: nickname,
     img: img,
@@ -25,6 +25,7 @@ export default function Mypage({}) {
     address: address,
     intro: intro,
   });
+
   const handleInputValue = (key) => (e) => {
     setProfile({ ...profile, [key]: e.target.value });
   };
@@ -81,7 +82,6 @@ export default function Mypage({}) {
     axios(url)
       // .delete(`${process.env.REACT_APP_API_URL}/user/withdrawal`)
       .then((res) => {
-        alert("회원탈퇴!");
         dispatch(logout());
         //   setUserinfo(null);
         navigate("/main");
@@ -102,18 +102,14 @@ export default function Mypage({}) {
     formData.append("file", e.target.childNodes[1].files[0]);
 
     axios
-      .patch(`http://localhost:4000/user/img/${id}`, formData, {
-        header: {
+      .patch(`${process.env.REACT_APP_API_URL}/user/img/${id}`, formData, {
+        headers: {
           "content-type": "multipart/form-data",
+          accesstoken: localStorage.getItem("accesstoken")
         },
       })
       .then((res) => {
-        isThumbnail(res.data.data.img);
         dispatch(patchImg(res.data.data.img));
-        //   setUserinfo((userinfo) => ({
-        //     ...userinfo,
-        //     img: res.data.data.img,
-        //   }));
       });
   };
 
@@ -215,12 +211,13 @@ export default function Mypage({}) {
                 <div className="top-master">
                   <div className="top-name">
                     <div className="profile">
-                      <img src=" 사용자.png" style={style} />
+                      <img src={`${img}`} style={style} />
                     </div>
                   </div>
                   <div className="top-text">
+
                     <div className="text-input-tick">
-                      {intro === "" ? "여러분의 일상을 공유해주세요" : intro}
+                      <div className="intro-array">{intro === "" ? "여러분의 일상을 공유해주세요" : intro}</div>
                     </div>
                   </div>
                 </div>
@@ -255,7 +252,20 @@ export default function Mypage({}) {
                     <div
                       className="submitbutton"
                       onClick={() => {
-                        withdraw();
+                        Swal.fire({
+                          title: "정말 삭제 하겠습니까?",
+                          icon: "warning",
+                          showCancelButton: true,
+                          confirmButtonColor: "#3085d6",
+                          cancelButtonColor: "#d33",
+                          cancelButtonText: "취소",
+                          confirmButtonText: "삭제",
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            withdraw();
+                            Swal.fire("삭제완료!", "");
+                          }
+                        });
                       }}
                     >
                       회원탈퇴

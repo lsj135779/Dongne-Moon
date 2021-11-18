@@ -5,6 +5,7 @@ import { logout } from "../actions/index";
 import styled from "styled-components";
 import "./Header.css";
 import axios from "axios";
+const logoImg = require("./../5.svg").default;
 axios.defaults.withCredentials = true;
 
 // import "./Header.css";
@@ -21,10 +22,10 @@ const HeadBox = styled.header`
 `;
 const Img = styled.img`
   height: ${(props) => props.height || "30px"};
-  width: ${(props) => props.width || "100px"};
+  width: ${(props) => props.width || "30px"};
 `;
 
-export default function Header({}) {
+export default function Header({ }) {
   const reduxState = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const { user, islogin } = reduxState;
@@ -44,7 +45,7 @@ export default function Header({}) {
           <div className="header-material"></div>
           <div className="header-material">
             <Link to="/">
-              <Img src="5.svg" />
+              <Img src={logoImg} alt-="logo" />
             </Link>
           </div>
           {islogin.islogin ? (
