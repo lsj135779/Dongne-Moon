@@ -8,11 +8,10 @@ import Footer from "../components/Footer";
 import Select from "react-select";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, patchIntro, patchNickname, patchImg } from "../actions/index";
-const logoImg = require("./../5.svg").default;
+const logoImg = require("../images/5.svg").default;
 
 export default function PostWrite() {
 
-  // const logopic = require('자산테스트.svg')
   const reduxState = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const { user, islogin } = reduxState;

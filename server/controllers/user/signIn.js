@@ -4,7 +4,6 @@ const { user } = require("../../models");
 const CryptoJS = require("crypto-js");
 
 module.exports = async (req, res) => {
-  console.log(req.body);
   const userInfo = await user.findOne({
     where: {
       email: req.body.email,

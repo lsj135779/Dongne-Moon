@@ -1,7 +1,7 @@
 import React from "react";
 import "./Category_Hobby.css";
-import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+
 
 export default function Category_Hobby() {
   return (
@@ -15,7 +15,7 @@ export default function Category_Hobby() {
                   <img
                     width="100px"
                     height="100px"
-                    src="취미.png"
+                    src={require('../images/취미.png').default}
                     alt="Mypage"
                   />
                 </div>
@@ -29,7 +29,7 @@ export default function Category_Hobby() {
             <div className="big-square memo">
               <div className="container">
                 <div className="pic">
-                  <img width="100px" height="100px" src="립.png" alt="Mypage" />
+                  <img width="100px" height="100px" src={require('../images/립.png').default} alt="Mypage" />
                 </div>
                 <div className="title">맛집</div>
               </div>
@@ -53,7 +53,7 @@ export default function Category_Hobby() {
                   <img
                     width="100px"
                     height="100px"
-                    src="반려동물.png"
+                    src={require('../images/반려동물.png').default}
                     alt="Mypage"
                   />
                 </div>
@@ -70,7 +70,7 @@ export default function Category_Hobby() {
                   <img
                     width="100px"
                     height="100px"
-                    src="동네소식.png"
+                    src={require('../images/동네소식.png').default}
                     alt="Mypage"
                   />
                 </div>

@@ -5,7 +5,7 @@ import { logout } from "../actions/index";
 import styled from "styled-components";
 import "./Header.css";
 import axios from "axios";
-const logoImg = require("./../5.svg").default;
+const logoImg = require("../images/5.svg").default;
 axios.defaults.withCredentials = true;
 
 // import "./Header.css";
@@ -44,7 +44,7 @@ export default function Header({ }) {
           <div className="header-material"></div>
           <div className="header-material"></div>
           <div className="header-material">
-            <Link to="/">
+            <Link to="/main">
               <Img src={logoImg} alt-="logo" />
             </Link>
           </div>

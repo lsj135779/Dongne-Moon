@@ -3,7 +3,7 @@ import "./PostReply.css";
 import axios from "axios";
 
 export default function PostReply({ reply, user, setPostReply }) {
-  // console.log(reply);
+
   const [clicked, isClicked] = useState(true);
   const [commenterInfo, setCommenterInfo] = useState(null);
   const header = {
@@ -29,7 +29,6 @@ export default function PostReply({ reply, user, setPostReply }) {
       .get(`${process.env.REACT_APP_API_URL}/comment/read/${reply.id}/`)
       .then((res) => {
         setCommenterInfo(res.data.data);
-        console.log(res.data);
         isClicked(!clicked);
       });
   };

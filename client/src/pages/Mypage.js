@@ -89,13 +89,11 @@ export default function Mypage({ }) {
   };
 
   const photoChange = (e) => {
-    console.log("사진 제출");
     e.target.nextSibling.click();
   };
 
   // 제출되었을 때의 로직
   const PhotoSubmit = (e) => {
-    console.log("사진 업로드");
     e.preventDefault();
     // formData로 전송해야 multer가 알아 듣습니다.
     const formData = new FormData();
@@ -117,167 +115,168 @@ export default function Mypage({ }) {
   return (
     <>
       <Header />
-      {edit ? (
-        <div className="mypage">
-          <div className="member-master">
-            <div className="member-material">
-              <div className="member-box">
-                <div className="top-master">
-                  <div className="top-name">
-                    <img className="profile" src={`${img}`} alt="" />
-                    <form
-                      classname="img-modify"
-                      encType="multipart/form-data"
-                      style={{ position: "relative" }}
-                      onSubmit={PhotoSubmit}
-                    >
+      <div className="mypage-master">
+        {edit ? (
+          <div className="mypage">
+            <div className="member-master">
+              <div className="member-material">
+                <div className="member-box">
+                  <div className="top-master">
+                    <div className="top-name">
+                      <img className="profile" src={`${img}`} alt="" />
+                      <form
+                        classname="img-modify"
+                        encType="multipart/form-data"
+                        style={{ position: "relative" }}
+                        onSubmit={PhotoSubmit}
+                      >
+                        <input
+                          type="button"
+                          value="사진수정"
+                          onClick={photoChange}
+                        ></input>
+                        <input
+                          type="file"
+                          name="file"
+                          id="file"
+                          accept="image/*"
+                          onChange={photoChange}
+                          style={{ display: "none" }}
+                        />
+                        <input type="submit" style={{ display: "none" }}></input>
+                      </form>
+                    </div>
+                    <div className="top-text">
                       <input
-                        type="button"
-                        value="사진수정"
-                        onClick={photoChange}
+                        type="text"
+                        defaultValue={intro}
+                        className="text-input-tick"
+                        onChange={handleInputValue("intro")}
                       ></input>
+                    </div>
+                  </div>
+                  <div className="nick-master">
+                    <div className="nick-name">닉네임</div>
+                    <div className="nick-text">
                       <input
-                        type="file"
-                        name="file"
-                        id="file"
-                        accept="image/*"
-                        onChange={photoChange}
-                        style={{ display: "none" }}
-                      />
-                      <input type="submit" style={{ display: "none" }}></input>
-                    </form>
-                  </div>
-                  <div className="top-text">
-                    <input
-                      type="text"
-                      defaultValue={intro}
-                      className="text-input-tick"
-                      onChange={handleInputValue("intro")}
-                    ></input>
-                  </div>
-                </div>
-                <div className="nick-master">
-                  <div className="nick-name">닉네임</div>
-                  <div className="nick-text">
-                    <input
-                      type="text"
-                      defaultValue={nickname}
-                      className="text-input"
-                      onChange={handleInputValue("nickname")}
-                    ></input>
-                  </div>
-                </div>
-                <div className="email-master1">
-                  <div className="email-name">이메일</div>
-                  <div className="email-text">
-                    <div className="text-input">{email}</div>
-                  </div>
-                </div>
-                <div className="address-master">
-                  <div className="address-name">주소</div>
-                  <div className="address-text">
-                    <div className="text-input">{address}</div>
-                  </div>
-                </div>
-                <div className="button-master">
-                  <div className="mypagebox">
-                    <div
-                      className="submitbutton"
-                      onClick={() => {
-                        editHandler();
-                      }}
-                    >
-                      수정
+                        type="text"
+                        defaultValue={nickname}
+                        className="text-input"
+                        onChange={handleInputValue("nickname")}
+                      ></input>
                     </div>
-                    <div
-                      className="submitbutton"
-                      onClick={() => {
-                        setEdit(false);
-                      }}
-                    >
-                      취소
+                  </div>
+                  <div className="email-master1">
+                    <div className="email-name">이메일</div>
+                    <div className="email-text">
+                      <div className="text-input">{email}</div>
+                    </div>
+                  </div>
+                  <div className="address-master">
+                    <div className="address-name">주소</div>
+                    <div className="address-text">
+                      <div className="text-input">{address}</div>
+                    </div>
+                  </div>
+                  <div className="button-master">
+                    <div className="mypagebox">
+                      <div
+                        className="submitbutton"
+                        onClick={() => {
+                          editHandler();
+                        }}
+                      >
+                        수정
+                      </div>
+                      <div
+                        className="submitbutton"
+                        onClick={() => {
+                          setEdit(false);
+                        }}
+                      >
+                        취소
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="mypage">
-          <div className="member-master">
-            <div className="member-material">
-              <div className="member-box">
-                <div className="top-master">
-                  <div className="top-name">
-                    <div className="profile">
-                      <img src={`${img}`} style={style} />
+        ) : (
+          <div className="mypage">
+            <div className="member-master">
+              <div className="member-material">
+                <div className="member-box">
+                  <div className="top-master">
+                    <div className="top-name">
+                      <div className="profile">
+                        <img src={`${img}`} style={style} />
+                      </div>
                     </div>
-                  </div>
-                  <div className="top-text">
+                    <div className="top-text">
 
-                    <div className="text-input-tick">
-                      <div className="intro-array">{intro === "" ? "여러분의 일상을 공유해주세요" : intro}</div>
+                      <div className="text-input-tick">
+                        <div className="intro-array">{intro === "" ? "여러분의 일상을 공유해주세요" : intro}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="nick-master">
-                  <div className="nick-name">닉네임</div>
-                  <div className="nick-text">
-                    <div className="text-input">{nickname}</div>
-                  </div>
-                </div>
-                <div className="email-master1">
-                  <div className="email-name">이메일</div>
-                  <div className="email-text">
-                    <div className="text-input">{email}</div>
-                  </div>
-                </div>
-                <div className="address-master">
-                  <div className="address-name">주소</div>
-                  <div className="address-text">
-                    <div className="text-input">{address}</div>
-                  </div>
-                </div>
-                <div className="button-master">
-                  <div className="mypagebox">
-                    <div
-                      className="submitbutton"
-                      onClick={() => {
-                        setEdit(true);
-                      }}
-                    >
-                      회원정보 수정
+                  <div className="nick-master">
+                    <div className="nick-name">닉네임</div>
+                    <div className="nick-text">
+                      <div className="text-input">{nickname}</div>
                     </div>
-                    <div
-                      className="submitbutton"
-                      onClick={() => {
-                        Swal.fire({
-                          title: "정말 삭제 하겠습니까?",
-                          icon: "warning",
-                          showCancelButton: true,
-                          confirmButtonColor: "#3085d6",
-                          cancelButtonColor: "#d33",
-                          cancelButtonText: "취소",
-                          confirmButtonText: "삭제",
-                        }).then((result) => {
-                          if (result.isConfirmed) {
-                            withdraw();
-                            Swal.fire("삭제완료!", "");
-                          }
-                        });
-                      }}
-                    >
-                      회원탈퇴
+                  </div>
+                  <div className="email-master1">
+                    <div className="email-name">이메일</div>
+                    <div className="email-text">
+                      <div className="text-input">{email}</div>
+                    </div>
+                  </div>
+                  <div className="address-master">
+                    <div className="address-name">주소</div>
+                    <div className="address-text">
+                      <div className="text-input">{address}</div>
+                    </div>
+                  </div>
+                  <div className="button-master">
+                    <div className="mypagebox">
+                      <div
+                        className="submitbutton"
+                        onClick={() => {
+                          setEdit(true);
+                        }}
+                      >
+                        회원정보 수정
+                      </div>
+                      <div
+                        className="submitbutton"
+                        onClick={() => {
+                          Swal.fire({
+                            title: "정말 삭제 하겠습니까?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            cancelButtonText: "취소",
+                            confirmButtonText: "삭제",
+                          }).then((result) => {
+                            if (result.isConfirmed) {
+                              withdraw();
+                              Swal.fire("삭제완료!", "");
+                            }
+                          });
+                        }}
+                      >
+                        회원탈퇴
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
-
+        )}
+      </div>
       <Footer />
     </>
   );

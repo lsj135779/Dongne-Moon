@@ -16,6 +16,5 @@ module.exports = async (req, res) => {
             attributes: ["nickname", "address"],
         },
     });
-    console.log("search;;;;;;;", search);
     return res.status(200).json({ data: search, message: "ok" });
 };
