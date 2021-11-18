@@ -35,29 +35,6 @@ export default function List({}) {
 
   // };
 
-  const ModifyModalBackdrop = styled.div`
-    position: fixed;
-    z-index: 999;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    display: grid;
-    place-items: center;
-  `;
-
-  const ModifyViews = styled.div`
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    /* align-items: center; */
-    border-radius: 15px;
-    background-color: white;
-    width: 400px;
-    height: 400px;
-  `;
-
   return (
     <>
       <Header />
@@ -105,45 +82,6 @@ export default function List({}) {
             </div>
           </div>
         </div>
-        <button
-          className="modifyBtn"
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
-        >
-          글쓰기
-        </button>
-        {isOpen ? (
-          <ModifyModalBackdrop
-            onClick={() => {
-              setIsOpen(!isOpen);
-            }}
-          >
-            <ModifyViews onClick={(e) => e.stopPropagation()}>
-              <div className="modalheader">
-                <div></div>
-                <h2>글 수정</h2>
-                <span
-                  className="closeBtn "
-                  onClick={() => {
-                    setIsOpen(!isOpen);
-                  }}
-                >
-                  X
-                </span>
-              </div>
-              <div className="modifyContainer">
-                <div className="modifyTitle"></div>
-                <textarea
-                  defaultValue={
-                    "가나다라마바사~~~~~~~~~~~~~~~~~~~~~1122323124124215253523qq"
-                  }
-                  className="text-input"
-                ></textarea>
-              </div>
-            </ModifyViews>
-          </ModifyModalBackdrop>
-        ) : null}
 
         {posts.map((post, index) => (
           <Post key={index} post={post} />
@@ -153,19 +91,11 @@ export default function List({}) {
         {postContent.map((post, index) => (
           <Post key={index} post={post} />
         ))}
-        <div className="write-master">
-          <div className="write-wrap">
-            <div className="write-button"></div>
-            <div className="write-button"></div>
-            <div className="write-button"></div>
-            <div className="write-button"></div>
-            <div className="write-button">
-              {" "}
-              <Link to="/post/create">
-                <div className="write-action">글 작성</div>
-              </Link>
-            </div>
-          </div>
+
+        <div className="write-button">
+          <Link to="/post/write">
+            <div className="write-action">글 작성</div>
+          </Link>
         </div>
       </div>
 

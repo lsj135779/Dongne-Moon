@@ -13,12 +13,9 @@ export default function PostRead({}) {
   const reduxState = useSelector((state) => state.userReducer);
   const { user, islogin } = reduxState;
   //   const navigate = useNavigate();
-  console.log(user.id);
   let { id } = useParams();
   const [postUser, setPostUser] = useState({});
-
   const [postReply, setPostReply] = useState([]);
-
   const [post, setPost] = useState({});
   const [replyWrite, setReplyWrite] = useState({
     reply: "",
@@ -57,6 +54,7 @@ export default function PostRead({}) {
     });
   }, [id]);
   const style = { width: "32px", height: "32px" };
+
   return (
     <>
       <Header />
@@ -68,22 +66,24 @@ export default function PostRead({}) {
                 <div className="post">
                   <div className="info">
                     <div className="user-profile">
-                      <img src="사용자.png" style={style} />
+                      <img src={`${user.img}`} style={style} />
                     </div>
-                    <div>
-                      <div>{postUser.nickname}</div>
-                      <div className="reply-user-address">
-                        <div className="reply-user-information">
-                          <span>{postUser.address}</span>
-                          <spam className="reply-user-views">
+                    <div className="user-info-wrap">
+                      <div className="user-nickName">{postUser.nickname}</div>
+                      <div className="reply-user-info-wrap">
+                        {postUser.address === undefined ? null : (
+                          <div>{postUser.address.split(",")[1]}</div>
+                        )}
+                        <div className="views-date-wrap">
+                          <div className="reply-user-views">
                             조회수 {post.views}
-                          </spam>
-                          <span className="reply-user-date">
-                            작성일{" "}
-                            {new Date(post.createdAt).toLocaleDateString(
-                              "ko-kr"
-                            )}
-                          </span>
+                            <div>
+                              작성일{" "}
+                              {new Date(post.createdAt).toLocaleDateString(
+                                "ko-kr"
+                              )}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -103,7 +103,6 @@ export default function PostRead({}) {
                 </div>
               </div>
             </div>
-
             <div className="reply-master">
               <div className="reply-wrap">
                 <div className="reply-title">

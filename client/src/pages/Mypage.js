@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, patchIntro, patchNickname } from "../actions/index";
+import { logout, patchIntro, patchNickname, patchImg } from "../actions/index";
 import "./Mypage.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -42,13 +42,7 @@ export default function Mypage({}) {
       };
       axios(url)
         .then((res) => {
-          // console.log("res.data.data;;;", res.data.data);
           dispatch(patchIntro(res.data.data.intro));
-
-          // setUserinfo((userinfo) => ({
-          //   ...userinfo,
-          //   intro: res.data.data.intro,
-          // }));
         })
         .catch((err) => {
           console.log(err);
@@ -66,21 +60,8 @@ export default function Mypage({}) {
         },
       };
       axios(url)
-        // .patch(
-        //   `${process.env.REACT_APP_API_URL}/user/nickname/${id}`,
-
-        //   {
-        //     nickname: profile.nickname,
-        //   }
-        // )
         .then((res) => {
-          // console.log("res.data.data.nickname;;", res.data.data.nickname);
           dispatch(patchNickname(res.data.data.nickname));
-
-          // setUserinfo((userinfo) => ({
-          //   ...userinfo,
-          //   nickname: res.data.data.nickname,
-          // }));
         })
         .catch((err) => {
           console.log(err);
@@ -127,8 +108,8 @@ export default function Mypage({}) {
         },
       })
       .then((res) => {
-        console.log(res.data);
         isThumbnail(res.data.data.img);
+        dispatch(patchImg(res.data.data.img));
         //   setUserinfo((userinfo) => ({
         //     ...userinfo,
         //     img: res.data.data.img,
@@ -147,13 +128,7 @@ export default function Mypage({}) {
               <div className="member-box">
                 <div className="top-master">
                   <div className="top-name">
-                    <div className="profile">
-                      <img
-                        className="profile"
-                        src={`${img}`}
-                        alt="나만의 프로필 사진을 넣어보세요."
-                      />
-                    </div>
+                    <img className="profile" src={`${img}`} alt="" />
                     <form
                       classname="img-modify"
                       encType="multipart/form-data"
@@ -175,59 +150,57 @@ export default function Mypage({}) {
                       />
                       <input type="submit" style={{ display: "none" }}></input>
                     </form>
-
-                    <img src=" 사용자.png" style={style} />
+                  </div>
+                  <div className="top-text">
+                    <input
+                      type="text"
+                      defaultValue={intro}
+                      className="text-input-tick"
+                      onChange={handleInputValue("intro")}
+                    ></input>
                   </div>
                 </div>
-                <div className="top-text">
-                  <input
-                    type="text"
-                    defaultValue={intro}
-                    className="text-input-tick"
-                    onChange={handleInputValue("intro")}
-                  ></input>
-                </div>
-              </div>
-              <div className="nick-master">
-                <div className="nick-name">닉네임</div>
-                <div className="nick-text">
-                  <input
-                    type="text"
-                    defaultValue={nickname}
-                    className="text-input"
-                    onChange={handleInputValue("nickname")}
-                  ></input>
-                </div>
-              </div>
-              <div className="email-master1">
-                <div className="email-name">이메일</div>
-                <div className="email-text">
-                  <div className="text-input">{email}</div>
-                </div>
-              </div>
-              <div className="address-master">
-                <div className="address-name">주소</div>
-                <div className="address-text">
-                  <div className="text-input">{address}</div>
-                </div>
-              </div>
-              <div className="button-master">
-                <div className="mypagebox">
-                  <div
-                    className="submitbutton"
-                    onClick={() => {
-                      editHandler();
-                    }}
-                  >
-                    수정
+                <div className="nick-master">
+                  <div className="nick-name">닉네임</div>
+                  <div className="nick-text">
+                    <input
+                      type="text"
+                      defaultValue={nickname}
+                      className="text-input"
+                      onChange={handleInputValue("nickname")}
+                    ></input>
                   </div>
-                  <div
-                    className="submitbutton"
-                    onClick={() => {
-                      setEdit(false);
-                    }}
-                  >
-                    취소
+                </div>
+                <div className="email-master1">
+                  <div className="email-name">이메일</div>
+                  <div className="email-text">
+                    <div className="text-input">{email}</div>
+                  </div>
+                </div>
+                <div className="address-master">
+                  <div className="address-name">주소</div>
+                  <div className="address-text">
+                    <div className="text-input">{address}</div>
+                  </div>
+                </div>
+                <div className="button-master">
+                  <div className="mypagebox">
+                    <div
+                      className="submitbutton"
+                      onClick={() => {
+                        editHandler();
+                      }}
+                    >
+                      수정
+                    </div>
+                    <div
+                      className="submitbutton"
+                      onClick={() => {
+                        setEdit(false);
+                      }}
+                    >
+                      취소
+                    </div>
                   </div>
                 </div>
               </div>

@@ -119,9 +119,35 @@
   color: #2e1d0e;
 }
 .reply-user-views {
-  margin-left: 10px;
+  display: flex;
+  margin-left: 1px;
+  margin-right: 5px;
+  font-size: small;
+  width: 100%;
+  justify-content: space-between;
+  margin-right: 30px;
+  flex-direction: row;
 }
 .reply-write {
   height: 40px;
+  width: 100%;
+}
+.reply-user-info-wrap {
+  display: flex;
+  font-size: small;
+  width: 100%;
+  flex-direction: column;
+}
+.views-date-wrap {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.user-nickName {
+  font-size: larger;
+  font-weight: bolder;
+}
+.user-info-wrap {
   width: 100%;
 }
