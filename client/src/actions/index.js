@@ -6,6 +6,7 @@ export const SET_POST = "SET_POST";
 export const LOGOUT = "LOGOUT";
 export const PATCH_INTRO = "PATCH_INTRO";
 export const PATCH_NICKNAME = "PATCH_NICKNAME";
+export const PATCH_IMG = "PATCH_IMG";
 
 export const axiosData = (api, action) => (dispatch) => {
   return axios(api)
@@ -50,11 +51,19 @@ export const patchIntro = (intro) => {
 };
 
 export const patchNickname = (nickname) => {
-  console.log("patchNickname;;", nickname);
   return {
     type: PATCH_NICKNAME,
     payload: {
       nickname,
+    },
+  };
+};
+
+export const patchImg = (img) => {
+  return {
+    type: PATCH_IMG,
+    payload: {
+      img,
     },
   };
 };

@@ -1,43 +1,95 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "./PostWrite.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
+import Select from "react-select";
 export default function PostWrite() {
+  const navigate = useNavigate();
+  const [postWrite, setPostWrite] = useState({
+    contents: "",
+  });
+  const [selected, setSelected] = useState("");
+
+  const handleInputValue = (key) => (e) => {
+    setPostWrite({ ...postWrite, [key]: e.target.value });
+  };
+
+  const header = {
+    accesstoken: localStorage.getItem("accesstoken"),
+  };
+  const createPost = () => {
+    axios
+      .post(
+        "http://localhost:4000/post/create",
+        {
+          userId: 1,
+          category: selected.value,
+          contents: postWrite.contents,
+        },
+        { headers: header }
+      )
+      .then((res) => {
+        alert("글 작성 완료!");
+        navigate(`/post=${selected.value}`);
+      });
+  };
+
+  const options = useMemo(
+    () => [
+      { value: "취미", label: "취미" },
+      { value: "맛집", label: "맛집" },
+      { value: "반려동물", label: "반려동물" },
+      { value: "동네소식", label: "동네소식" },
+    ],
+    []
+  );
+  const handleChange = (selected) => {
+    setSelected(selected);
+  };
+
   return (
     <>
       <Header />
-      <div className="postwrite-box-master">
-        <div className="postwrite-box-wrap">
-          <div className="postwrite-box">
-            <div className="postwrite-master">
-              <div className="postwrite-wrap">
-                <div className="postwrite">
-                  <div className="info">
-                    <div className="postwrite-profile">사용자</div>
-                    <div>
-                      <div>닉네임</div>
-                      <div className="postwrite-user-address">
-                        <div className="postwrite-user-information">
-                          <span>주소</span>
-                          <spam className="postwrite-user-views">
-                            조회수 뷰
-                          </spam>
-                          <span className="postwrite-user-date">오예</span>
-                        </div>
+      <div className="postwrite-master">
+        <div className="postwrite-material">
+          <div className="logo">
+            <Link to="/main">
+              <img src="자산 5.svg" alt="" className="signinlogo" />
+            </Link>
+          </div>
+          <div className="postwrite-master">
+            <div className="postwrite-wrap">
+              <div className="postwrite-form">
+                <div className="email-master">
+                  <div className="writelabel">
+                    <div className="subject-select">
+                      <div className="category">
+                        무엇을 공유하고 싶으신가요?
                       </div>
+                      <Select
+                        options={options}
+                        value={selected}
+                        onChange={handleChange}
+                        defaultMenuIsOpen
+                      />
                     </div>
                   </div>
+                  <textarea
+                    className="wrtieinput"
+                    onChange={handleInputValue("contents")}
+                  ></textarea>
+                </div>
 
-                  <div className="postwrite-main">
-                    <div className="postwrite-main-content">
-                      <input className="postwrite-input"></input>
-                    </div>
-                    <div className="postwrite-erase-wrap">
-                      <div className="postwrite-action">글 작성</div>
-                    </div>
+                <div className="submitbox">
+                  <div
+                    className="submitbutton"
+                    onClick={() => {
+                      createPost();
+                    }}
+                  >
+                    글 작성
                   </div>
                 </div>
               </div>
@@ -45,6 +97,7 @@ export default function PostWrite() {
           </div>
         </div>
       </div>
+
       <Footer />
     </>
   );
