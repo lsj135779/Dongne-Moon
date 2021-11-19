@@ -1,94 +1,82 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../actions/index";
 import styled from "styled-components";
+import "./Header.css";
+import axios from "axios";
+const logoImg = require("../images/5.svg").default;
+axios.defaults.withCredentials = true;
+
 // import "./Header.css";
 const HeadBox = styled.header`
   height: 60px;
-  /* border-style: solid;
-	border-width: 2px; */
+  width: 100%;
+  border-style: solid;
+  border-width: 2px;
   position: relative;
   background-color: #ffdbc1;
   border-bottom: 1px gray;
   display: flex;
   align-items: center;
-  .leftheader {
-    flex: 3 0 0;
-  }
-  .mid {
-    /* display: flex;
-    justify-content: center; */
-    text-align: center;
-    padding-top: 8px;
-    flex: 4 0 0;
-
-    /* text-align: center; */
-  }
-  .right {
-    display: flex;
-    flex: 2.5 0 0;
-    /* margin-right: 200px; */
-  }
-  .logo {
-    margin-right: 10px;
-  }
-  .logout {
-    text-decoration: none;
-    color: black;
-  }
 `;
 const Img = styled.img`
   height: ${(props) => props.height || "30px"};
-  width: ${(props) => props.width || "100px"};
+  width: ${(props) => props.width || "30px"};
 `;
 
-export default function Header() {
+export default function Header({ }) {
+  const reduxState = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+  const { user, islogin } = reduxState;
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    localStorage.removeItem("accesstoken");
+    navigate("/main");
+  };
+
   return (
-    // <div className="container">
-    //   <header>
-    //     <h2>
-    //       {" "}
-    //       <Link to="/" className="logo">
-    //         <Img src="달달달.png" />
-    //       </Link>
-    //     </h2>
+    <div className="headBox">
+      <div>
+        <div className="header-master">
+          <div className="header-material"></div>
+          <div className="header-material"></div>
+          <div className="header-material">
+            <Link to="/main">
+              <Img src={logoImg} alt-="logo" />
+            </Link>
+          </div>
+          {islogin.islogin ? (
+            <div className="header-material">
+              <Link to="/mypage">
+                {" "}
+                <div className="logout">Mypage</div>
+              </Link>
+              <div
+                className="logout"
+                onClick={() => {
+                  handleLogout();
+                }}
+              >
+                Logout
+              </div>
+            </div>
+          ) : (
+            <div className="header-material">
+              <Link to="/login" className="login">
+                Login
+              </Link>
+              <Link to="/signup" className="signup">
+                Signup
+              </Link>
+            </div>
+          )}
 
-    //     <nav>
-    //       <ul>
-    //         <li>
-    //           <a href="/mypage">
-    //             <img width="10px" height="15px" src="mypage.ico" />
-    //           </a>
-    //         </li>
-    //         <li>
-    //           <a href="/logout">LOG OUT</a>
-    //         </li>
-    //       </ul>
-    //     </nav>
-    //   </header>
-    // </div>
-
-    <HeadBox>
-      <div className="leftheader"></div>
-      <div className="mid">
-        <Link to="/" className="mid ">
-          <Img src="달달달.png" />
-        </Link>
+          <div className="header-material"></div>
+        </div>
       </div>
-
-      <div className="right logout">
-        <Link to="/mypage">
-          <Img
-            width="10px"
-            height="15px"
-            className="right logo"
-            src="mypage.ico"
-            alt="Mypage"
-          />
-        </Link>
-        <Link to="/logout" className="logout">
-          <div>Logout</div>
-        </Link>
-      </div>
-    </HeadBox>
+    </div>
   );
 }

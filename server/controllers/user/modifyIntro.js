@@ -1,5 +1,6 @@
 const { user } = require("../../models");
 const { verify } = require("jsonwebtoken");
+const { upload } = require('../upload');
 
 module.exports = async (req, res) => {
   const { intro } = req.body;
@@ -7,21 +8,21 @@ module.exports = async (req, res) => {
   if (!token) {
     return res.status(403).json({ message: "fail" });
   } else {
-    const userInfo = verify(token, process.env.ACCESS_SECRET);
-    if (!userInfo) {
+    const verified = verify(token, process.env.ACCESS_SECRET);
+    if (!verified) {
       return res.status(403).json({ message: "invalid token" });
     } else {
       await user.update(
         { intro: intro },
         {
           where: {
-            id: userInfo.id,
+            id: verified.id,
           },
         }
       );
       const userIntro = await user.findOne({
         where: {
-          id: userInfo.id,
+          id: verified.id,
         },
         attributes: ["intro"],
       });

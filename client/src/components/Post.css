@@ -1,0 +1,102 @@
+.feed-master {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.feed-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0 0 0;
+}
+.feed {
+  color: black;
+  min-width: 450px;
+  max-width: 800px;
+  width: 30%;
+  height: 200px;
+  border-radius: 20px;
+  border: 3px solid #fccda3;
+  background-color: white;
+}
+.subject-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  position: relative;
+}
+.subject {
+  background-color: #fccda3;
+  border-radius: 20px;
+  width: 15%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 5%;
+  top: 40%;
+}
+.content-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  position: relative;
+}
+.content {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  left: 5%;
+}
+.address-date-wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 25%;
+  margin-left: 5%;
+}
+.address {
+  width: 50%;
+  height: 100%;
+  left: 5%;
+}
+.getdate {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  right: 5%;
+}
+.comment-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  position: relative;
+  margin-left: 5%;
+}
+.comment {
+  width: 20%;
+  height: 50%;
+}
+.date {
+  width: 25%;
+  align-items: flex-end;
+  margin-right: 5%;
+}
