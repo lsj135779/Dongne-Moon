@@ -1,0 +1,55 @@
+.headBox {
+  height: 60px;
+  width: 100%;
+  /* position: fixed; */
+  background-color: #ffffff;
+  box-shadow: rgb(0 0 0 / 20%) 0px 0px 4px 0px;
+}
+.header-master {
+  flex-direction: row;
+  display: flex;
+  width: 100%;
+}
+.header-material {
+  margin-top: 15px;
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.header-nickname {
+  margin-right: 5px;
+  font-size: 11px;
+}
+
+.logout {
+  text-decoration: none;
+  margin-left: 5%;
+  color: #68625d;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 16px;
+}
+.logout:hover {
+  cursor: pointer;
+}
+.login {
+  color: #68625d;
+  text-decoration: none;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 16px;
+}
+.signup {
+  color: #68625d;
+  margin-left: 5%;
+  text-decoration: none;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 16px;
+}
+.logo {
+  width: 50px;
+  height: 50px;
+}
